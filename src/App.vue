@@ -1,62 +1,56 @@
 <template>
   <div class="app-container">
-    <div class="top-line">
-      <!-- Far left: Logo -->
-      <img src="./assets/tableLogo.jpg" alt="AccuSalt Logo" class="logo" />
+    <div class="top-line-wrapper">
+      <div class="top-line">
+        <!-- Far left: Logo -->
+        <img src="./assets/tableLogo.jpg" alt="AccuSalt Logo" class="logo" />
 
-      <!-- Date Range button -->
-      <button
-        @click="triggerDateRange"
-        class="select-date"
-        :disabled="!isAuthenticated"
-      >
-        Date Range
-      </button>
-      <!-- Start/end date input -->
-      <input
-        type="text"
-        class="date-display"
-        :value="isAuthenticated ? dateRangeDisplay : ''"
-        :placeholder="!isAuthenticated ? 'Sign in to select dates' : ''"
-        readonly
-        :disabled="!isAuthenticated"
-      />
-      <!-- Sign in/out button always right of date input -->
-      <button class="sign-in" v-if="!isAuthenticated" @click="onSignInClick">
-        Sign in
-      </button>
-      <button class="sign-out" v-if="isAuthenticated" @click="onSignOutClick">
-        Sign out
-      </button>
-      <!-- Hidden DtRange component (calendar) -->
-      <DtRange
-        ref="dtRangeRef"
-        :startUnix="startDate"
-        :stopUnix="stopDate"
-        @update:start="onStartDateUpdate"
-        @update:stop="onStopDateUpdate"
-      />
+        <!-- Date Range button -->
+        <button
+          @click="triggerDateRange"
+          class="select-date"
+          :disabled="!isAuthenticated"
+        >
+          Date Range
+        </button>
+
+        <!-- Start/end date input -->
+        <input
+          type="text"
+          class="date-display"
+          :value="isAuthenticated ? dateRangeDisplay : ''"
+          :placeholder="!isAuthenticated ? 'Sign in to select dates' : ''"
+          readonly
+          :disabled="!isAuthenticated"
+        />
+
+        <!-- Sign in/out button -->
+        <button class="sign-in" v-if="!isAuthenticated" @click="onSignInClick">
+          Sign in
+        </button>
+        <button class="sign-out" v-if="isAuthenticated" @click="onSignOutClick">
+          Sign out
+        </button>
+
+        <!-- Hidden Date Picker -->
+        <DtRange
+          ref="dtRangeRef"
+          :startUnix="startDate"
+          :stopUnix="stopDate"
+          @update:start="onStartDateUpdate"
+          @update:stop="onStopDateUpdate"
+        />
+      </div>
     </div>
 
-    <!-- Table/results below -->
-    <div v-if="isAuthenticated && itemsFetched">
-      <table v-if="items.length" class="results-table">
-        <thead>
-          <tr>
-            <th v-for="key in tableHeaders" :key="key">{{ key }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="item in items"
-            :key="item.id || item.ID || item.timestamp || item.pk"
-          >
-            <td v-for="key in tableHeaders" :key="key">{{ item[key] }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div v-else class="no-data-msg">No data found for selected range.</div>
+    <!-- Grid Display -->
+    <div v-if="isAuthenticated && itemsFetched" class="grid-wrapper">
+      <Grid :data="items" />
+      <div v-if="statusMessage" class="status-msg">
+        {{ statusMessage }}
+      </div>
     </div>
+
     <div v-if="fetchError" style="color: red">Error: {{ fetchError }}</div>
   </div>
 </template>
@@ -66,43 +60,44 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useAuth } from './useAuth.js'
 import { useDynamoDB } from './useDynamoDB.js'
 import DtRange from './DtRange.vue'
+import Grid from './Grid.vue'
 
-// ---- Default dates: JUL/01/2020 - NOV/23/2020 ----
+// ---- Default dates ----
 function getUnix(month, day, year) {
   return Math.floor(new Date(year, month - 1, day).getTime() / 1000)
 }
-const defaultStartUnix = getUnix(7, 1, 2020)
-const defaultStopUnix = getUnix(11, 23, 2020)
 
-const startDate = ref(defaultStartUnix)
-const stopDate = ref(defaultStopUnix)
+const startDate = ref(null)
+const stopDate = ref(null)
+
+// const defaultStartUnix = getUnix(7, 1, 2020)
+// const defaultStopUnix = getUnix(11, 23, 2020)
+
+// const startDate = ref(defaultStartUnix)
+// const stopDate = ref(defaultStopUnix)
+
 const dtRangeRef = ref(null)
 
-// ---- Auth state & logic ----
+// ---- Auth ----
 const { user, signIn, signOut, checkAuth } = useAuth()
 const isAuthenticated = computed(() => !!user.value)
 onMounted(() => {
   if (typeof checkAuth === 'function') checkAuth()
 })
-
 function onSignInClick() {
   if (typeof signIn === 'function') signIn()
-  else console.error('signIn is not a function')
 }
 function onSignOutClick() {
   if (typeof signOut === 'function') signOut()
-  else console.error('signOut is not a function')
 }
 
-// ---- Date picker logic ----
+// ---- Date logic ----
 function triggerDateRange() {
   if (!isAuthenticated.value) {
     alert('Please sign in to select dates.')
     return
   }
-  if (dtRangeRef.value && typeof dtRangeRef.value.openPicker === 'function') {
-    dtRangeRef.value.openPicker()
-  }
+  dtRangeRef.value?.openPicker()
 }
 function onStartDateUpdate(val) {
   if (val != null) startDate.value = val
@@ -124,14 +119,25 @@ const dateRangeDisplay = computed(() =>
     : ''
 )
 
-// ---- DynamoDB query integration ----
+// ---- Data & fetch ----
 const { items, fetchError, itemsFetched, fetchItems } = useDynamoDB()
-const tableHeaders = computed(() =>
-  items.value.length > 0 ? Object.keys(items.value[0]) : []
-)
+const isLoading = ref(false)
+const statusMessage = ref('')
+
 watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
-  if (authed && start && stop) {
+  // only run query if both dates are valid numbers
+  if (authed && Number.isInteger(start) && Number.isInteger(stop)) {
+    isLoading.value = true
+    statusMessage.value = 'Searching for records...'
+
     await fetchItems(start.toString(), stop.toString())
+
+    isLoading.value = false
+    statusMessage.value = items.value.length
+      ? ''
+      : 'No data found for selected range.'
+  } else {
+    statusMessage.value = ''
   }
 })
 </script>
@@ -149,8 +155,12 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
 
 .app-container {
   width: 100%;
-  min-width: 600px; /* Ensures no wrapping of the top line */
   font-family: Arial, sans-serif;
+}
+
+.top-line-wrapper {
+  margin-top: 0; /* or even 0px */
+  margin-bottom: 0; /* Ensures no extra space around the top line */
 }
 
 .select-date:disabled {
@@ -163,15 +173,17 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
 
 .top-line {
   display: flex;
-  align-items: center;
+  align-items: center; /* Aligns items to the bottom */
+  justify-content: flex-start; /* 🔧 ensures everything aligns left */
   width: 100%;
-  padding: 0.5em 0;
+  gap: 0.2em; /* optional: adds consistent spacing between elements */
 }
-
 .logo {
   height: 20px;
+
   width: auto;
-  margin-right: 10px;
+  margin-left: 10px;
+  margin-right: px;
 }
 
 .select-date {
@@ -267,5 +279,20 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   font-size: 1.12rem;
   text-align: left;
   letter-spacing: 0.01em;
+}
+
+.status-msg {
+  margin: 0.5em 10px;
+  font-size: 1rem;
+  color: #333;
+  background: #f1f1f1;
+  border-left: 4px solid #2196f3;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.grid-wrapper {
+  margin: 4px 10px 0 10px;
+  text-align: left;
 }
 </style>

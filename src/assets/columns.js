@@ -1,6 +1,6 @@
 export const columns = [
   {
-    field: 'Site',
+    field: 'siteName',
     headerText: 'Site',
     textAlign: 'left',
     width: '180px',
