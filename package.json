@@ -3,12 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 5173",
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^5.0.0",
+    "@aws-amplify/core": "^5.0.0",
+    "@aws-sdk/client-dynamodb": "^3.0.0",
+    "@aws-sdk/util-dynamodb": "^3.0.0",
+    "@syncfusion/ej2-base": "^29.2.4",
+    "@syncfusion/ej2-buttons": "^29.2.5",
+    "@syncfusion/ej2-vue-calendars": "^29.2.5",
+    "@syncfusion/ej2-vue-grids": "^29.2.8",
+    "aws-amplify": "^6.15.0",
     "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "cross-env": "^7.0.3",
+    "vue": "^3.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
