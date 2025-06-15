@@ -209,8 +209,9 @@ body {
 }
 
 .export-button {
-  padding: 8px 16px;
+  padding: 0px 10px;
   font-size: 14px;
+  height: 25px;
   background-color: #1976d2;
   color: white;
   border: none;
@@ -222,10 +223,13 @@ body {
 }
 
 .export-dropdown {
-  padding: 6px 10px;
+  padding: 0px 10px;
   font-size: 14px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  height: 25px;
+  margin-left: 120px;
+  border: none;
+  /* border: 1px solid #ccc; */
 }
 
 .e-grid td.e-selectionbackground {
