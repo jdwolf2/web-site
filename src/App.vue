@@ -214,7 +214,7 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   color: black;
   border: none;
   cursor: pointer;
-  margin-right: 0.4em;
+  margin-left: 0;
   white-space: nowrap;
   width: auto;
   min-width: 0;
@@ -233,7 +233,7 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   color: black;
   border: none;
   cursor: pointer;
-  margin-right: 0.4em;
+  margin-left: 0;
   white-space: nowrap;
   width: auto;
   min-width: 0;
