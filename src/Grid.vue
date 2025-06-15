@@ -17,7 +17,8 @@
             :showColumnChooser="true"
             :enableScrolling="true"
             :scrollSettings="scrollSettings"
-            :allowPaging="false"
+            :allowPaging="true"
+            :pageSettings="pageSettings"
             :allowGrouping="true"
             :allowSorting="true"
             :showColumnMenu="true"
@@ -61,6 +62,7 @@ import {
   Resize,
   ColumnMenu,
   Filter,
+  Page,
 } from '@syncfusion/ej2-vue-grids'
 
 const props = defineProps({
@@ -73,12 +75,17 @@ const props = defineProps({
 const scrollSettings = { width: '100%', height: '100%' }
 const groupOptions = { showGroupedColumn: true }
 const filterSettings = { type: 'CheckBox' }
+const pageSettings = ref({
+  pageSize: 10,
+  pageSizes: true,
+  currentPage: 1,
+})
 
 const selectedColumns = ref(columns.map((col) => col.field))
 const displayedColumns = ref(columns)
 const gridRef = ref(null)
 
-provide('grid', [Group, Sort, Resize, ColumnMenu, Filter])
+provide('grid', [Group, Sort, Resize, ColumnMenu, Filter, Page])
 
 const updateColumns = () => {
   displayedColumns.value = columns.filter((col) =>
@@ -151,10 +158,10 @@ button {
 }
 
 /* .table-container {
-    height: 30%;
-    margin-top: auto;
-    margin-bottom: auto;
-  } */
+      height: 30%;
+      margin-top: auto;
+      margin-bottom: auto;
+    } */
 .page-container {
   display: block;
   width: 100%;
@@ -163,11 +170,11 @@ button {
 }
 
 /* #table-container {
-    overflow: auto;
-  }
-  #table-div {
-    overflow: auto;
-  } */
+      overflow: auto;
+    }
+    #table-div {
+      overflow: auto;
+    } */
 
 .e-grid {
   overflow: auto;
@@ -201,15 +208,15 @@ button {
 }
 
 /* @media (max-width: 800px) {
-    .e-daterangepicker.e-popup {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      margin-right: auto;
-      margin-bottom: auto;
-    } */
+      .e-daterangepicker.e-popup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin-right: auto;
+        margin-bottom: auto;
+      } */
 
 .custom-filter-popup {
   max-height: 800px;
@@ -244,10 +251,10 @@ button {
   /* background-color: white; */
 }
 /* .logo-divider {
-    width: 100%;
-    height: 5px;
-    border-bottom: 1px solid black;
-  } */
+      width: 100%;
+      height: 5px;
+      border-bottom: 1px solid black;
+    } */
 .dateRangePicker {
   display: inline-block;
   width: 300px;
@@ -325,8 +332,8 @@ button {
 }
 
 /* .e-calendar .e-content thead {
-    background: black;
-  } */
+      background: black;
+    } */
 
 .e-grid
   .e-gridheader
