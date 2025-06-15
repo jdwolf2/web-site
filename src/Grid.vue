@@ -3,6 +3,17 @@
     <div class="page-container">
       <div id="table-container">
         <div id="table-div">
+          <div class="export-controls">
+            <select v-model="exportOption" class="export-dropdown">
+              <option value="all">All Records</option>
+              <option value="currentPage">Current Page</option>
+              <option value="filtered">Filtered Records</option>
+            </select>
+            <button class="export-button" @click="exportToExcel">
+              Export to Excel
+            </button>
+          </div>
+
           <EjsGrid
             ref="gridRef"
             id="gridcomp"
@@ -63,6 +74,7 @@ import {
   ColumnMenu,
   Filter,
   Page,
+  ExcelExport,
 } from '@syncfusion/ej2-vue-grids'
 
 const props = defineProps({
@@ -85,7 +97,9 @@ const selectedColumns = ref(columns.map((col) => col.field))
 const displayedColumns = ref(columns)
 const gridRef = ref(null)
 
-provide('grid', [Group, Sort, Resize, ColumnMenu, Filter, Page])
+provide('grid', [Group, Sort, Resize, ColumnMenu, Filter, Page, ExcelExport])
+
+const exportOption = ref('all')
 
 const updateColumns = () => {
   displayedColumns.value = columns.filter((col) =>
@@ -133,6 +147,43 @@ const onHeaderCellInfo = (args) => {
       break
   }
 }
+
+const exportToExcel = () => {
+  const exportProperties = {
+    fileName: 'AccuSalt_Data.xlsx',
+    header: {
+      headerRows: 2,
+      rows: [
+        {
+          cells: [
+            {
+              colSpan: 5,
+              value: 'AccuSalt Export',
+              style: { fontSize: 20, hAlign: 'Center', bold: true },
+            },
+          ],
+        },
+        {
+          cells: [
+            {
+              colSpan: 5,
+              value: `Exported: ${new Date().toLocaleDateString()}`,
+              style: { fontSize: 12, hAlign: 'Center' },
+            },
+          ],
+        },
+      ],
+    },
+  }
+
+  if (exportOption.value === 'currentPage') {
+    exportProperties.exportType = 'CurrentPage'
+  } else if (exportOption.value === 'filtered') {
+    exportProperties.isFiltered = true
+  }
+
+  gridRef.value?.excelExport(exportProperties)
+}
 </script>
 
 <style>
@@ -144,37 +195,49 @@ const onHeaderCellInfo = (args) => {
 @import '~@syncfusion/ej2-navigations/styles/material.css';
 @import '~@syncfusion/ej2-popups/styles/material.css';
 @import '~@syncfusion/ej2-splitbuttons/styles/material.css';
+@import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
 
 body {
   background-color: rgb(80, 80, 80);
 }
 
-button {
-  margin: 10px;
+.export-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 10px 10px;
+}
+
+.export-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.export-button:hover {
+  background-color: #125ea4;
+}
+
+.export-dropdown {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
 .e-grid td.e-selectionbackground {
   background-color: #00b7ea;
 }
 
-/* .table-container {
-      height: 30%;
-      margin-top: auto;
-      margin-bottom: auto;
-    } */
 .page-container {
   display: block;
   width: 100%;
   margin: 0;
   overflow: auto;
 }
-
-/* #table-container {
-      overflow: auto;
-    }
-    #table-div {
-      overflow: auto;
-    } */
 
 .e-grid {
   overflow: auto;
@@ -191,10 +254,7 @@ button {
 
 .block-container {
   display: flex;
-  /* flex-grow: 1 1 auto; */
   align-items: center;
-  /* display: block; */
-  /* background-color: black; */
   background-color: white;
   margin-top: 2%;
   height: max-content;
@@ -207,17 +267,6 @@ button {
   }
 }
 
-/* @media (max-width: 800px) {
-      .e-daterangepicker.e-popup {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        margin-right: auto;
-        margin-bottom: auto;
-      } */
-
 .custom-filter-popup {
   max-height: 800px;
   z-index: 2147483647;
@@ -225,8 +274,8 @@ button {
   top: -69.2533px;
   display: block;
   visibility: visible;
-  position: absolute; /* Ensure it can float */
-  left: 0px; /* Align to the left */
+  position: absolute;
+  left: 0px;
 }
 
 .e-gridheader {
@@ -238,44 +287,32 @@ button {
 }
 
 .logo {
-  /* display: inline-block; */
   width: auto;
   height: 40px;
-  /* margin-bottom: 10px; */
-
   margin-left: auto;
   padding-right: 10px;
-  /* margin-bottom: 15px; */
-  /* margin: 0 auto -20px 10px; */
-
-  /* background-color: white; */
 }
-/* .logo-divider {
-      width: 100%;
-      height: 5px;
-      border-bottom: 1px solid black;
-    } */
+
 .dateRangePicker {
   display: inline-block;
   width: 300px;
   height: 40px;
   background-color: white;
-  /* background-color: lightgreen; */
   font-family: Arial, Helvetica, sans-serif;
   padding-left: 25px;
   margin-top: 0;
   margin-bottom: 0;
   padding-right: 20px;
-  /* margin-left: 25px; */
 }
+
 .e-popup {
-  /* transform: translate(192px, 5px); */
   height: fit-content;
 }
 
 .e-hide {
   display: none;
 }
+
 .e-grid .e-gridheader {
   border: 1px solid white;
 }
@@ -331,10 +368,6 @@ button {
   color: chocolate;
 }
 
-/* .e-calendar .e-content thead {
-      background: black;
-    } */
-
 .e-grid
   .e-gridheader
   .e-icons:not(.e-icon-hide):not(.e-check):not(.e-stop):not(
@@ -353,6 +386,4 @@ button {
 .e-grid th.e-headercell[aria-sort='descending'] .e-sortfilterdiv {
   color: white;
 }
-
-@import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
 </style>
