@@ -212,7 +212,7 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   color: black;
   border: none;
   cursor: pointer;
-  margin-left: 0;
+  margin-left: 5px;
   white-space: nowrap;
   width: auto;
   min-width: 0;
@@ -231,7 +231,7 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   color: black;
   border: none;
   cursor: pointer;
-  margin-left: 0;
+  margin-left: 5px;
   white-space: nowrap;
   width: auto;
   min-width: 0;
@@ -249,7 +249,7 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   background: #f5f5f5;
   padding: 0 12px;
   min-width: 210px;
-  margin-right: 0.4em;
+  /* margin-right: 0.4em; */
 }
 
 .results-table {
