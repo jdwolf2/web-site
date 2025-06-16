@@ -3,7 +3,6 @@
     <div class="top-line-wrapper">
       <div class="top-line">
         <!-- Far left: Logo -->
-        <img src="./assets/tableLogo.jpg" alt="AccuSalt Logo" class="logo" />
 
         <!-- Date Range button -->
         <button
@@ -11,7 +10,7 @@
           class="select-date"
           :disabled="!isAuthenticated"
         >
-          Date Range
+          Select Date Range
         </button>
 
         <!-- Start/end date input -->
@@ -125,19 +124,8 @@ const isLoading = ref(false)
 const statusMessage = ref('')
 
 watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
-  // only run query if both dates are valid numbers
   if (authed && Number.isInteger(start) && Number.isInteger(stop)) {
-    isLoading.value = true
-    statusMessage.value = 'Searching for records...'
-
     await fetchItems(start.toString(), stop.toString())
-
-    isLoading.value = false
-    statusMessage.value = items.value.length
-      ? ''
-      : 'No data found for selected range.'
-  } else {
-    statusMessage.value = ''
   }
 })
 </script>
@@ -164,26 +152,21 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
 }
 
 .select-date:disabled {
+  margin-left: 10;
   background: #f0f0f0;
   color: #a0a0a0;
   cursor: not-allowed;
   border: 1px solid #e0e0e0;
   opacity: 1; /* Ensures the button does not appear "faded away" unless you want it to */
-}
-
-.top-line {
-  display: flex;
-  align-items: center; /* Aligns items to the bottom */
-  justify-content: flex-start; /* 🔧 ensures everything aligns left */
-  width: 100%;
-  gap: 0.2em; /* optional: adds consistent spacing between elements */
-}
-.logo {
-  height: 20px;
-
-  width: auto;
+  font-size: 14px;
+  height: 25px;
+  padding: 0 10px;
+  border-radius: 5px;
+  margin-right: 0.4em;
   margin-left: 10px;
-  margin-right: px;
+  white-space: nowrap;
+  width: auto;
+  min-width: 0;
 }
 
 .select-date {
@@ -196,6 +179,7 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   border: none;
   cursor: pointer;
   margin-right: 0.4em;
+  margin-left: 10px;
   white-space: nowrap;
   width: auto;
   min-width: 0;
@@ -204,6 +188,20 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   background: #125da4;
   color: #fff;
 }
+.top-line {
+  display: flex;
+  align-items: center; /* Aligns items to the bottom */
+  justify-content: flex-start; /* 🔧 ensures everything aligns left */
+  width: 100%;
+  gap: 0.2em; /* optional: adds consistent spacing between elements */
+}
+/* .logo {
+  height: 20px;
+  margin-left: auto;
+  width: auto;
+  height: 30px;
+  margin-right: 20px;
+} */
 
 .sign-in {
   font-size: 14px;

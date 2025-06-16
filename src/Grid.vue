@@ -4,14 +4,14 @@
       <div id="table-container">
         <div id="table-div">
           <div class="export-controls">
+            <button class="export-button" @click="exportToExcel">
+              Export to Excel
+            </button>
             <select v-model="exportOption" class="export-dropdown">
               <option value="all">All Records</option>
               <option value="currentPage">Current Page</option>
               <option value="filtered">Filtered Records</option>
             </select>
-            <button class="export-button" @click="exportToExcel">
-              Export to Excel
-            </button>
           </div>
 
           <EjsGrid
@@ -38,7 +38,7 @@
             :filterSettings="filterSettings"
             :allowTextWrap="true"
             :autoFit="true"
-            :width="'auto'"
+            :width="'min-content'"
             :height="'400px'"
             :frozenRows="0"
             :frozenColumns="1"
@@ -208,7 +208,7 @@ body {
   margin: 10px 0 10px 10px;
 }
 
-.export-button {
+/* .export-button {
   padding: 0px 10px;
   font-size: 14px;
   height: 25px;
@@ -217,17 +217,35 @@ body {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+} */
+
+.export-button {
+  font-size: 14px;
+  height: 25px;
+  padding: 0 10px;
+  border-radius: 5px;
+  background: lightblue;
+  color: black;
+  border: none;
+  cursor: pointer;
+  margin-left: -10px;
+  margin-right: 0;
+  padding-right: 32px;
+  white-space: nowrap;
+  width: auto;
+  min-width: 0;
 }
-.export-button:hover {
-  background-color: #125ea4;
+.export-button:hover:enabled {
+  background: #125da4;
+  color: #fff;
 }
 
 .export-dropdown {
   padding: 0px 10px;
   font-size: 14px;
-  border-radius: 4px;
+  border-radius: 5px;
   height: 25px;
-  margin-left: 120px;
+  margin-left: 0px;
   border: none;
   /* border: 1px solid #ccc; */
 }
@@ -290,11 +308,20 @@ body {
   display: flex;
 }
 
-.logo {
+/* .logo {
   width: auto;
   height: 40px;
   margin-left: auto;
   padding-right: 10px;
+} */
+
+.logo {
+  display: inline-block;
+  height: 20px;
+  margin-left: auto;
+  width: auto;
+  height: 30px;
+  margin-right: 20px;
 }
 
 .dateRangePicker {
@@ -390,4 +417,7 @@ body {
 .e-grid th.e-headercell[aria-sort='descending'] .e-sortfilterdiv {
   color: white;
 }
+/* e-groupdroparea e-lib e-droppable e-draggable {
+  width: fit-content;
+} */
 </style>
