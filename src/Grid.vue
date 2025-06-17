@@ -1,3 +1,6 @@
+uploading two Grid.vue the first is the current file which causes an error when
+xporting xcell the second file is where this actually worked
+
 <template>
   <div class="total-container">
     <div class="page-container">
@@ -24,8 +27,8 @@
             :allowReordering="true"
             :allowExcelExport="true"
             :columnQueryMode="'ExcludeHidden'"
-            :allowPdfExport="true"
-            :showColumnChooser="true"
+            :allowPdfExport="false"
+            :showColumnChooser="false"
             :enableScrolling="true"
             :scrollSettings="scrollSettings"
             :allowPaging="true"
@@ -39,7 +42,7 @@
             :allowTextWrap="true"
             :autoFit="true"
             :width="'min-content'"
-            :height="'400px'"
+            :height="'500px'"
             :frozenRows="0"
             :frozenColumns="1"
             @headerCellInfo="onHeaderCellInfo"
@@ -99,7 +102,7 @@ const gridRef = ref(null)
 
 provide('grid', [Group, Sort, Resize, ColumnMenu, Filter, Page, ExcelExport])
 
-const exportOption = ref('all')
+const exportOption = ref('currentPage')
 
 const updateColumns = () => {
   displayedColumns.value = columns.filter((col) =>
@@ -417,7 +420,4 @@ body {
 .e-grid th.e-headercell[aria-sort='descending'] .e-sortfilterdiv {
   color: white;
 }
-/* e-groupdroparea e-lib e-droppable e-draggable {
-  width: fit-content;
-} */
 </style>
