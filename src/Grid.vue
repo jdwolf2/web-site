@@ -1,6 +1,3 @@
-uploading two Grid.vue the first is the current file which causes an error when
-xporting xcell the second file is where this actually worked
-
 <template>
   <div class="total-container">
     <div class="page-container">
@@ -24,7 +21,7 @@ xporting xcell the second file is where this actually worked
             :allowScrolling="true"
             :rowHeight="40"
             :enableAltRow="true"
-            :allowReordering="true"
+            :allowReordering="false"
             :allowExcelExport="true"
             :columnQueryMode="'ExcludeHidden'"
             :allowPdfExport="false"
@@ -34,7 +31,7 @@ xporting xcell the second file is where this actually worked
             :allowPaging="true"
             :pageSettings="pageSettings"
             :allowGrouping="true"
-            :allowSorting="true"
+            :allowSorting="false"
             :showColumnMenu="true"
             :groupSettings="groupOptions"
             :allowFiltering="true"
@@ -45,11 +42,12 @@ xporting xcell the second file is where this actually worked
             :height="'500px'"
             :frozenRows="0"
             :frozenColumns="1"
+            :columnMenuItems="['ColumnChooser', 'Filter']"
             @headerCellInfo="onHeaderCellInfo"
           >
             <EColumns>
               <EColumn
-                v-for="col in displayedColumns"
+                v-for="col in filteredColumns"
                 :key="col.field"
                 :field="col.field"
                 :headerText="col.headerText"
@@ -65,8 +63,8 @@ xporting xcell the second file is where this actually worked
 </template>
 
 <script setup>
-import { ref, onMounted, watch, provide } from 'vue'
-import { columns } from './assets/columns.js'
+import { ref, onMounted, watch, provide, computed } from 'vue'
+import { columns, dateValueAccessor } from './assets/columns.js'
 import {
   GridComponent as EjsGrid,
   ColumnDirective as EColumn,
@@ -91,17 +89,19 @@ const scrollSettings = { width: '100%', height: '100%' }
 const groupOptions = { showGroupedColumn: true }
 const filterSettings = { type: 'CheckBox' }
 const pageSettings = ref({
-  pageSize: 10,
-  pageSizes: true,
+  pageSize: 100,
+  pageSizes: false,
   currentPage: 1,
 })
 
 const selectedColumns = ref(columns.map((col) => col.field))
 const displayedColumns = ref(columns)
+const filteredColumns = computed(() =>
+  displayedColumns.value.filter((col) => col.visible !== false)
+)
+
 const gridRef = ref(null)
-
 provide('grid', [Group, Sort, Resize, ColumnMenu, Filter, Page, ExcelExport])
-
 const exportOption = ref('currentPage')
 
 const updateColumns = () => {
@@ -121,7 +121,7 @@ const onHeaderCellInfo = (args) => {
   const columnField = args.cell.column.field
   const headerCell = args.node
 
-  headerCell.style.padding = '0 25px 0 10px'
+  headerCell.style.padding = '0 5px 0 5px'
   headerCell.style.borderColor = 'lightlightgray'
   headerCell.style.borderRight = '1px solid white'
 
@@ -419,5 +419,30 @@ body {
 .e-grid th.e-headercell[aria-sort='ascending'] .e-sortfilterdiv,
 .e-grid th.e-headercell[aria-sort='descending'] .e-sortfilterdiv {
   color: white;
+}
+
+.e-grid .e-headercell .e-columnmenu {
+  margin-left: 0; /* Adjust this value as needed */
+  padding-left: 0px; /* Ensure no padding */
+}
+
+.e-grid .e-headercell[data-ej-mappingname='Truck'] .e-headercelldiv {
+  display: flex;
+  justify-content: start; /* Align text to the left */
+  padding-right: 0 !important; /* Remove extra padding */
+  gap: 0 !important; /* Eliminate spacing between text and icons */
+}
+
+.e-grid .e-headercell.e-filtered .e-columnmenu {
+  color: white !important; /* Change icon color */
+  background-color: darkblue !important; /* Change icon background */
+  border-radius: 4px; /* Optional: rounded corners */
+  padding: 2px; /* Optional: tighter fit */
+}
+
+.e-grid .e-filtered::before {
+  color: black;
+  background-color: yellow;
+  border: 5px solid yellow;
 }
 </style>

@@ -207,5 +207,11 @@ button {
 .e-grid th.e-headercell[aria-sort='descending'] .e-sortfilterdiv {
   color: white;
 }
-
 @import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
+.e-grid .e-filtered ::after {
+  background-color: #00b7ea;
+  color: white;
+}
+.e-grid .e-filtered::before {
+  color: white;
+}
