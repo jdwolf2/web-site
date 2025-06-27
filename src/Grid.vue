@@ -443,6 +443,6 @@ body {
 .e-grid .e-filtered::before {
   color: black;
   background-color: yellow;
-  border: 5px solid yellow;
+  border: 7px solid yellow;
 }
 </style>
