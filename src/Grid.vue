@@ -169,7 +169,7 @@ body {
   font-size: 14px;
   height: 25px;
   padding: 0 10px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background: lightblue;
   color: black;
   border: none;
@@ -189,7 +189,7 @@ body {
 .export-dropdown {
   padding: 0px 10px;
   font-size: 14px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   height: 25px;
   margin-left: 0px;
   border: none;
@@ -387,5 +387,9 @@ body {
   color: black;
   background-color: yellow;
   border: 7px solid yellow;
+}
+
+body {
+  background-color: rgb(50, 50, 50);
 }
 </style>
