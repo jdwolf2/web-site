@@ -3,17 +3,6 @@
     <div class="page-container">
       <div id="table-container">
         <div id="table-div">
-          <div class="export-controls">
-            <button class="export-button" @click="exportToExcel">
-              Export to Excel
-            </button>
-            <select v-model="exportOption" class="export-dropdown">
-              <option value="all">All Records</option>
-              <option value="currentPage">Current Page</option>
-              <option value="filtered">Filtered Records</option>
-            </select>
-          </div>
-
           <EjsGrid
             ref="gridRef"
             id="gridcomp"
@@ -33,6 +22,7 @@
             :allowGrouping="true"
             :allowSorting="false"
             :showColumnMenu="true"
+            :columnMenuItems="['ColumnChooser', 'Filter']"
             :groupSettings="groupOptions"
             :allowFiltering="true"
             :filterSettings="filterSettings"
@@ -42,7 +32,6 @@
             :height="'500px'"
             :frozenRows="0"
             :frozenColumns="1"
-            :columnMenuItems="['ColumnChooser', 'Filter']"
             @headerCellInfo="onHeaderCellInfo"
           >
             <EColumns>
@@ -64,7 +53,7 @@
 
 <script setup>
 import { ref, onMounted, watch, provide, computed } from 'vue'
-import { columns, dateValueAccessor } from './assets/columns.js'
+import { columns } from './assets/columns.js'
 import {
   GridComponent as EjsGrid,
   ColumnDirective as EColumn,
@@ -88,11 +77,7 @@ const props = defineProps({
 const scrollSettings = { width: '100%', height: '100%' }
 const groupOptions = { showGroupedColumn: true }
 const filterSettings = { type: 'CheckBox' }
-const pageSettings = ref({
-  pageSize: 100,
-  pageSizes: false,
-  currentPage: 1,
-})
+const pageSettings = ref({ pageSize: 100, pageSizes: false, currentPage: 1 })
 
 const selectedColumns = ref(columns.map((col) => col.field))
 const displayedColumns = ref(columns)
@@ -102,27 +87,22 @@ const filteredColumns = computed(() =>
 
 const gridRef = ref(null)
 provide('grid', [Group, Sort, Resize, ColumnMenu, Filter, Page, ExcelExport])
-const exportOption = ref('currentPage')
-
-const updateColumns = () => {
-  displayedColumns.value = columns.filter((col) =>
-    selectedColumns.value.includes(col.field)
-  )
-  gridRef.value?.autoFitColumns()
-}
 
 onMounted(() => {
   gridRef.value?.autoFitColumns()
 })
 
-watch(selectedColumns, updateColumns)
+watch(selectedColumns, () => {
+  displayedColumns.value = columns.filter((col) =>
+    selectedColumns.value.includes(col.field)
+  )
+  gridRef.value?.autoFitColumns()
+})
 
 const onHeaderCellInfo = (args) => {
-  const columnField = args.cell.column.field
   const headerCell = args.node
-
-  headerCell.style.padding = '0 5px 0 5px'
-  headerCell.style.borderColor = 'lightlightgray'
+  const columnField = args.cell.column.field
+  headerCell.style.padding = '0 5px'
   headerCell.style.borderRight = '1px solid white'
 
   switch (columnField) {
@@ -135,7 +115,7 @@ const onHeaderCellInfo = (args) => {
     case 'StartTime':
     case 'StopTime':
     case 'Duration':
-      headerCell.style.background = 'rgb(0,0, 150)'
+      headerCell.style.background = 'rgb(0,0,150)'
       break
     case 'Total':
     case 'Rate':
@@ -143,49 +123,12 @@ const onHeaderCellInfo = (args) => {
       break
     case 'Lat':
     case 'Lon':
-      headerCell.style.background = 'rgb(100,0, 0)'
+      headerCell.style.background = 'rgb(100,0,0)'
       break
     case 'Temp':
       headerCell.style.background = 'lightblue'
       break
   }
-}
-
-const exportToExcel = () => {
-  const exportProperties = {
-    fileName: 'AccuSalt_Data.xlsx',
-    header: {
-      headerRows: 2,
-      rows: [
-        {
-          cells: [
-            {
-              colSpan: 5,
-              value: 'AccuSalt Export',
-              style: { fontSize: 20, hAlign: 'Center', bold: true },
-            },
-          ],
-        },
-        {
-          cells: [
-            {
-              colSpan: 5,
-              value: `Exported: ${new Date().toLocaleDateString()}`,
-              style: { fontSize: 12, hAlign: 'Center' },
-            },
-          ],
-        },
-      ],
-    },
-  }
-
-  if (exportOption.value === 'currentPage') {
-    exportProperties.exportType = 'CurrentPage'
-  } else if (exportOption.value === 'filtered') {
-    exportProperties.isFiltered = true
-  }
-
-  gridRef.value?.excelExport(exportProperties)
 }
 </script>
 
@@ -231,7 +174,7 @@ body {
   color: black;
   border: none;
   cursor: pointer;
-  margin-left: -10px;
+  margin-left: 10px;
   margin-right: 0;
   padding-right: 32px;
   white-space: nowrap;
@@ -318,14 +261,14 @@ body {
   padding-right: 10px;
 } */
 
-.logo {
+/* .logo {
   display: inline-block;
   height: 20px;
   margin-left: auto;
   width: auto;
   height: 30px;
   margin-right: 20px;
-}
+} */
 
 .dateRangePicker {
   display: inline-block;

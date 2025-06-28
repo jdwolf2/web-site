@@ -2,9 +2,7 @@
   <div class="app-container">
     <div class="top-line-wrapper">
       <div class="top-line">
-        <!-- Far left: Logo -->
-
-        <!-- Date Range button -->
+        <img src="./assets/tableLogo.jpg" alt="AccuSalt Logo" class="logo" />
         <button
           @click="triggerDateRange"
           class="select-date"
@@ -23,7 +21,26 @@
           :disabled="!isAuthenticated"
         />
 
-        <!-- Sign in/out button -->
+        <!-- Export controls -->
+        <button
+          class="export-button"
+          @click="onExportToExcel"
+          :disabled="!isAuthenticated || items.length === 0"
+        >
+          Export to Excel
+        </button>
+
+        <select
+          v-model="exportOption"
+          class="export-dropdown"
+          :disabled="!isAuthenticated || items.length === 0"
+        >
+          <option value="all">All Records</option>
+          <option value="currentPage">Current Page</option>
+          <option value="filtered">Filtered Records</option>
+        </select>
+
+        <!-- Auth buttons -->
         <button class="sign-in" v-if="!isAuthenticated" @click="onSignInClick">
           Sign in
         </button>
@@ -42,7 +59,6 @@
       </div>
     </div>
 
-    <!-- Grid Display -->
     <div v-if="isAuthenticated && itemsFetched" class="grid-wrapper">
       <Grid :data="items" />
       <div v-if="statusMessage" class="status-msg">
@@ -61,23 +77,10 @@ import { useDynamoDB } from './useDynamoDB.js'
 import DtRange from './DtRange.vue'
 import Grid from './Grid.vue'
 
-// ---- Default dates ----
-function getUnix(month, day, year) {
-  return Math.floor(new Date(year, month - 1, day).getTime() / 1000)
-}
-
 const startDate = ref(null)
 const stopDate = ref(null)
-
-// const defaultStartUnix = getUnix(7, 1, 2020)
-// const defaultStopUnix = getUnix(11, 23, 2020)
-
-// const startDate = ref(defaultStartUnix)
-// const stopDate = ref(defaultStopUnix)
-
 const dtRangeRef = ref(null)
 
-// ---- Auth ----
 const { user, signIn, signOut, checkAuth } = useAuth()
 const isAuthenticated = computed(() => !!user.value)
 onMounted(() => {
@@ -90,7 +93,6 @@ function onSignOutClick() {
   if (typeof signOut === 'function') signOut()
 }
 
-// ---- Date logic ----
 function triggerDateRange() {
   if (!isAuthenticated.value) {
     alert('Please sign in to select dates.')
@@ -118,19 +120,58 @@ const dateRangeDisplay = computed(() =>
     : ''
 )
 
-// ---- Data & fetch ----
 const { items, fetchError, itemsFetched, fetchItems } = useDynamoDB()
-const isLoading = ref(false)
 const statusMessage = ref('')
+const exportOption = ref('currentPage')
 
 watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   if (authed && Number.isInteger(start) && Number.isInteger(stop)) {
     await fetchItems(start.toString(), stop.toString())
   }
 })
+
+function onExportToExcel() {
+  const grid = document.getElementById('gridcomp')?.ej2_instances?.[0]
+  if (!grid) return
+
+  const exportProps = {
+    fileName: 'AccuSalt_Data.xlsx',
+    header: {
+      headerRows: 2,
+      rows: [
+        {
+          cells: [
+            {
+              colSpan: 5,
+              value: 'AccuSalt Export',
+              style: { fontSize: 20, hAlign: 'Center', bold: true },
+            },
+          ],
+        },
+        {
+          cells: [
+            {
+              colSpan: 5,
+              value: `Exported: ${new Date().toLocaleDateString()}`,
+              style: { fontSize: 12, hAlign: 'Center' },
+            },
+          ],
+        },
+      ],
+    },
+  }
+
+  if (exportOption.value === 'currentPage') {
+    exportProps.exportType = 'CurrentPage'
+  } else if (exportOption.value === 'filtered') {
+    exportProps.isFiltered = true
+  }
+
+  grid.excelExport(exportProps)
+}
 </script>
 
-<style>
+<style scoped>
 @import '~@syncfusion/ej2-base/styles/material.css';
 @import '~@syncfusion/ej2-buttons/styles/material.css';
 @import '~@syncfusion/ej2-calendars/styles/material.css';
@@ -141,142 +182,132 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
 @import '~@syncfusion/ej2-splitbuttons/styles/material.css';
 @import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
 
+.logo {
+  /* display: inline-block; */
+  width: auto;
+  height: 35px;
+  /* margin-bottom: 10px; */
+
+  margin-left: 10px;
+  margin-right: 0;
+  /* padding-right: 10px; */
+  /* margin-bottom: 15px; */
+  /* margin: 0 auto -20px 10px; */
+
+  /* background-color: white; */
+}
+
 .app-container {
   width: 100%;
   font-family: Arial, sans-serif;
 }
 
 .top-line-wrapper {
-  margin-top: 0; /* or even 0px */
-  margin-bottom: 0; /* Ensures no extra space around the top line */
+  margin: 0;
+  margin-top: 20px;
 }
 
-.select-date:disabled {
-  margin-left: 10;
-  background: #f0f0f0;
-  color: #a0a0a0;
-  cursor: not-allowed;
-  border: 1px solid #e0e0e0;
-  opacity: 1; /* Ensures the button does not appear "faded away" unless you want it to */
-  font-size: 14px;
+.top-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.select-date,
+.sign-in,
+.sign-out,
+.export-button,
+.export-dropdown {
   height: 25px;
-  padding: 0 10px;
+  font-size: 14px;
   border-radius: 5px;
-  margin-right: 0.4em;
-  margin-left: 10px;
   white-space: nowrap;
-  width: auto;
-  min-width: 0;
+  margin: 0;
 }
 
 .select-date {
-  font-size: 14px;
-  height: 25px;
-  padding: 0 10px;
-  border-radius: 5px;
   background: lightblue;
   color: black;
   border: none;
   cursor: pointer;
-  margin-right: 0.4em;
-  margin-left: 10px;
-  white-space: nowrap;
-  width: auto;
-  min-width: 0;
+  padding: 0 10px;
+}
+.select-date:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
 .select-date:hover:enabled {
   background: #125da4;
-  color: #fff;
+  color: white;
 }
-.top-line {
-  display: flex;
-  align-items: center; /* Aligns items to the bottom */
-  justify-content: flex-start; /* 🔧 ensures everything aligns left */
-  width: 100%;
-  gap: 0.2em; /* optional: adds consistent spacing between elements */
+
+.export-button {
+  background: lightblue;
+  color: black;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
 }
-/* .logo {
-  height: 20px;
-  margin-left: auto;
-  width: auto;
-  height: 30px;
-  margin-right: 20px;
-} */
+.export-button:hover:enabled {
+  background: #125da4;
+  color: white;
+}
+.export-button:disabled {
+  background-color: gray;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.export-dropdown {
+  padding: 0 10px;
+  border: none;
+}
+.export-dropdown:disabled {
+  background-color: #ccc;
+  color: #666;
+  opacity: 0.6;
+}
 
 .sign-in {
-  font-size: 14px;
-  height: 25px;
-  padding: 0 10px;
-  border-radius: 5px;
   background: lightgreen;
   color: black;
   border: none;
   cursor: pointer;
-  margin-left: 5px;
-  white-space: nowrap;
-  width: auto;
-  min-width: 0;
+  padding: 0 10px;
 }
-.sign-in:hover:enabled {
+.sign-in:hover {
   background: green;
   color: white;
 }
 
 .sign-out {
-  font-size: 14px;
-  height: 25px;
-  padding: 0 10px;
-  border-radius: 5px;
   background: lightyellow;
   color: black;
   border: none;
   cursor: pointer;
-  margin-left: 5px;
-  white-space: nowrap;
-  width: auto;
-  min-width: 0;
+  padding: 0 10px;
 }
-.sign-out:hover:enabled {
+.sign-out:hover {
   background: yellow;
   color: black;
 }
 
 .date-display {
-  font-size: 16px;
   height: 25px;
+  font-size: 16px;
   border-radius: 5px;
   border: 1px solid #bdbdbd;
   background: #f5f5f5;
   padding: 0 12px;
   min-width: 210px;
-  /* margin-right: 0.4em; */
 }
 
-.results-table {
-  margin-top: 1.2em;
-  border-collapse: collapse;
-  width: 100%;
-}
-.results-table th,
-.results-table td {
-  border: 1px solid #ccc;
-  padding: 8px 12px;
-  font-size: 1rem;
-}
-.results-table th {
-  background: #f5f5f5;
-  font-weight: bold;
-}
-.no-data-msg {
-  margin-top: 1em;
-  color: #d32f2f;
-  background: #fff4f4;
-  border: 1px solid #ffcdd2;
-  padding: 12px 18px;
-  border-radius: 7px;
-  font-size: 1.12rem;
+.grid-wrapper {
+  margin: 4px 10px 0 10px;
   text-align: left;
-  letter-spacing: 0.01em;
 }
 
 .status-msg {
@@ -287,10 +318,5 @@ watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   border-left: 4px solid #2196f3;
   padding: 8px 12px;
   border-radius: 4px;
-}
-
-.grid-wrapper {
-  margin: 4px 10px 0 10px;
-  text-align: left;
 }
 </style>
