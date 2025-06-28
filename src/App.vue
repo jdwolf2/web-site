@@ -1,72 +1,87 @@
 <template>
-  <div class="app-container">
-    <div class="top-line-wrapper">
-      <div class="top-line">
-        <img src="./assets/tableLogo.jpg" alt="AccuSalt Logo" class="logo" />
-        <button
-          @click="triggerDateRange"
-          class="select-date"
-          :disabled="!isAuthenticated"
-        >
-          Select Date Range
-        </button>
+  <div class="outer-wrapper">
+    <div class="app-container">
+      <div class="top-line-wrapper">
+        <div class="top-line">
+          <img src="./assets/tableLogo.jpg" alt="AccuSalt Logo" class="logo" />
 
-        <!-- Start/end date input -->
-        <input
-          type="text"
-          class="date-display"
-          :value="isAuthenticated ? dateRangeDisplay : ''"
-          :placeholder="!isAuthenticated ? 'Sign in to select dates' : ''"
-          readonly
-          :disabled="!isAuthenticated"
-        />
+          <button
+            @click="triggerDateRange"
+            class="select-date"
+            :disabled="!isAuthenticated || isLoading"
+          >
+            Select Date Range
+          </button>
 
-        <!-- Export controls -->
-        <button
-          class="export-button"
-          @click="onExportToExcel"
-          :disabled="!isAuthenticated || items.length === 0"
-        >
-          Export to Excel
-        </button>
+          <input
+            type="text"
+            class="date-display"
+            :value="isAuthenticated ? dateRangeDisplay : ''"
+            :placeholder="!isAuthenticated ? 'Sign in to select dates' : ''"
+            readonly
+            :disabled="!isAuthenticated"
+          />
 
-        <select
-          v-model="exportOption"
-          class="export-dropdown"
-          :disabled="!isAuthenticated || items.length === 0"
-        >
-          <option value="all">All Records</option>
-          <option value="currentPage">Current Page</option>
-          <option value="filtered">Filtered Records</option>
-        </select>
+          <div
+            class="export-group"
+            :class="{
+              disabled: !isAuthenticated || items.length === 0 || isLoading,
+            }"
+          >
+            <button
+              class="export-button"
+              @click="onExportToExcel"
+              :disabled="!isAuthenticated || items.length === 0 || isLoading"
+            >
+              Export to Excel
+            </button>
 
-        <!-- Auth buttons -->
-        <button class="sign-in" v-if="!isAuthenticated" @click="onSignInClick">
-          Sign in
-        </button>
-        <button class="sign-out" v-if="isAuthenticated" @click="onSignOutClick">
-          Sign out
-        </button>
+            <select
+              v-model="exportOption"
+              class="export-dropdown"
+              :disabled="!isAuthenticated || items.length === 0 || isLoading"
+            >
+              <option value="all">All Records</option>
+              <option value="currentPage">Current Page</option>
+              <option value="filtered">Filtered Records</option>
+            </select>
+          </div>
 
-        <!-- Hidden Date Picker -->
-        <DtRange
-          ref="dtRangeRef"
-          :startUnix="startDate"
-          :stopUnix="stopDate"
-          @update:start="onStartDateUpdate"
-          @update:stop="onStopDateUpdate"
-        />
+          <button
+            class="sign-in"
+            v-if="!isAuthenticated"
+            @click="onSignInClick"
+          >
+            Sign in
+          </button>
+          <button
+            class="sign-out"
+            v-if="isAuthenticated"
+            @click="onSignOutClick"
+          >
+            Sign out
+          </button>
+
+          <DtRange
+            ref="dtRangeRef"
+            :startUnix="startDate"
+            :stopUnix="stopDate"
+            @update:start="onStartDateUpdate"
+            @update:stop="onStopDateUpdate"
+          />
+        </div>
       </div>
-    </div>
 
-    <div v-if="isAuthenticated && itemsFetched" class="grid-wrapper">
-      <Grid :data="items" />
-      <div v-if="statusMessage" class="status-msg">
-        {{ statusMessage }}
+      <div class="grid-wrapper">
+        <div v-if="isAuthenticated && isLoading" class="loading-msg">
+          Searching for records…
+        </div>
+        <Grid v-else-if="isAuthenticated && itemsFetched" :data="items" />
+        <div v-if="statusMessage" class="status-msg">{{ statusMessage }}</div>
       </div>
-    </div>
 
-    <div v-if="fetchError" style="color: red">Error: {{ fetchError }}</div>
+      <div v-if="fetchError" style="color: red">Error: {{ fetchError }}</div>
+    </div>
   </div>
 </template>
 
@@ -83,9 +98,12 @@ const dtRangeRef = ref(null)
 
 const { user, signIn, signOut, checkAuth } = useAuth()
 const isAuthenticated = computed(() => !!user.value)
+const isLoading = ref(false)
+
 onMounted(() => {
   if (typeof checkAuth === 'function') checkAuth()
 })
+
 function onSignInClick() {
   if (typeof signIn === 'function') signIn()
 }
@@ -126,7 +144,9 @@ const exportOption = ref('currentPage')
 
 watch([startDate, stopDate, isAuthenticated], async ([start, stop, authed]) => {
   if (authed && Number.isInteger(start) && Number.isInteger(stop)) {
+    isLoading.value = true
     await fetchItems(start.toString(), stop.toString())
+    isLoading.value = false
   }
 })
 
@@ -172,39 +192,28 @@ function onExportToExcel() {
 </script>
 
 <style scoped>
-@import '~@syncfusion/ej2-base/styles/material.css';
-@import '~@syncfusion/ej2-buttons/styles/material.css';
-@import '~@syncfusion/ej2-calendars/styles/material.css';
-@import '~@syncfusion/ej2-dropdowns/styles/material.css';
-@import '~@syncfusion/ej2-inputs/styles/material.css';
-@import '~@syncfusion/ej2-navigations/styles/material.css';
-@import '~@syncfusion/ej2-popups/styles/material.css';
-@import '~@syncfusion/ej2-splitbuttons/styles/material.css';
-@import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
-
-.logo {
-  /* display: inline-block; */
-  width: auto;
-  height: 35px;
-  /* margin-bottom: 10px; */
-
-  margin-left: 10px;
-  margin-right: 0;
-  /* padding-right: 10px; */
-  /* margin-bottom: 15px; */
-  /* margin: 0 auto -20px 10px; */
-
-  /* background-color: white; */
+.outer-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
 }
 
 .app-container {
   width: 100%;
+  max-width: 1500px;
   font-family: Arial, sans-serif;
 }
 
+.logo {
+  width: auto;
+  height: 35px;
+  margin-left: 10px;
+  margin-right: 0;
+}
+
 .top-line-wrapper {
-  margin: 0;
-  margin-top: 20px;
+  margin: 50px 0 0 0;
 }
 
 .top-line {
@@ -241,6 +250,19 @@ function onExportToExcel() {
 .select-date:hover:enabled {
   background: #125da4;
   color: white;
+}
+
+.export-group {
+  display: flex;
+  align-items: center;
+  border: 2px solid white;
+  padding: 2px 5px;
+  border-radius: 6px;
+  gap: 5px;
+}
+.export-group.disabled {
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .export-button {
@@ -308,6 +330,7 @@ function onExportToExcel() {
 .grid-wrapper {
   margin: 4px 10px 0 10px;
   text-align: left;
+  min-height: 520px;
 }
 
 .status-msg {
@@ -318,5 +341,11 @@ function onExportToExcel() {
   border-left: 4px solid #2196f3;
   padding: 8px 12px;
   border-radius: 4px;
+}
+
+.loading-msg {
+  font-size: 1.1rem;
+  margin: 20px;
+  color: #333;
 }
 </style>
