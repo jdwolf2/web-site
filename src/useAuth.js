@@ -3,7 +3,9 @@ import { ref, onMounted } from 'vue'
 import { Amplify } from '@aws-amplify/core'
 import { Auth } from '@aws-amplify/auth'
 
-// ─── 1) Configure Amplify exactly as before ───────────────────────────────
+// ─── Use static ngrok domain ─────────────────────────────────────────────
+const redirectUri = 'https://wolf.ngrok.app/'
+
 Amplify.configure({
   Auth: {
     region: 'us-east-2',
@@ -13,21 +15,18 @@ Amplify.configure({
     oauth: {
       domain: 'us-east-2g2vpbtsqp.auth.us-east-2.amazoncognito.com',
       scope: ['openid', 'email', 'profile'],
-      redirectSignIn: 'http://localhost:5173/',
-      redirectSignOut: 'http://localhost:5173/',
+      redirectSignIn: redirectUri,
+      redirectSignOut: redirectUri,
       responseType: 'code',
     },
   },
 })
-// ───────────────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────
 
 export function useAuth() {
   const user = ref(null)
 
   onMounted(async () => {
-    // 1) If the URL contains "code=", Cognito just redirected here after login.
-    //    We call currentAuthenticatedUser() immediately so Amplify can exchange
-    //    the code for tokens and populate the user.
     if (window.location.search.includes('code=')) {
       try {
         const currentUser = await Auth.currentAuthenticatedUser()
@@ -37,8 +36,6 @@ export function useAuth() {
         )
         user.value = currentUser
 
-        // Remove the ?code=…&state=… from the URL so that future reloads are clean.
-        // (We only need it on this first redirect.)
         const cleanUrl = window.location.origin + window.location.pathname
         window.history.replaceState({}, document.title, cleanUrl)
       } catch (err) {
@@ -46,7 +43,6 @@ export function useAuth() {
         user.value = null
       }
     } else {
-      // 2) Normal “check for existing session” on initial page load.
       try {
         const currentUser = await Auth.currentAuthenticatedUser()
         console.log(
@@ -64,36 +60,29 @@ export function useAuth() {
     }
   })
 
-  /**
-   * Manually redirect browser to Cognito’s Hosted Login page.
-   * We still include "&prompt=login" to force credentials if a cookie exists.
-   */
   function signIn() {
     console.log('[useAuth] signIn() → redirecting to Cognito Hosted UI')
 
     const domain = 'https://us-east-2g2vpbtsqp.auth.us-east-2.amazoncognito.com'
     const clientId = '2ps5f1adntoj56ml8ll8c7lbrg'
-    const redirectUri = encodeURIComponent('http://localhost:5173/')
+    const encodedRedirectUri = encodeURIComponent(redirectUri)
     const responseType = 'code'
     const scope = encodeURIComponent('openid email profile')
+
     const loginUrl =
       `${domain}/login?client_id=${clientId}` +
       `&response_type=${responseType}` +
       `&scope=${scope}` +
-      `&redirect_uri=${redirectUri}` +
+      `&redirect_uri=${encodedRedirectUri}` +
       `&prompt=login`
 
     window.location.href = loginUrl
   }
 
-  /**
-   * Local signOut (no global), clearing Amplify’s cached tokens.
-   * After this, user.value = null and template shows Sign-in again.
-   */
   async function signOut() {
     try {
       console.log('[useAuth] signOut() → clearing local session')
-      await Auth.signOut() // no { global: true } to avoid scope errors
+      await Auth.signOut()
     } catch (err) {
       console.warn('[useAuth] error signing out:', err)
     } finally {
