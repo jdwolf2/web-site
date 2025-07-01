@@ -10,7 +10,7 @@
             class="select-date"
             :disabled="!isAuthenticated || isLoading"
           >
-            Select Date Range
+            Dates
           </button>
 
           <input
@@ -33,7 +33,7 @@
               @click="onExportToExcel"
               :disabled="!isAuthenticated || items.length === 0 || isLoading"
             >
-              Export to Excel
+              Excel >>
             </button>
 
             <select
@@ -91,6 +91,7 @@ import { useAuth } from './useAuth.js'
 import { useDynamoDB } from './useDynamoDB.js'
 import DtRange from './DtRange.vue'
 import Grid from './Grid.vue'
+const classVal = 'customCSS'
 
 const startDate = ref(null)
 const stopDate = ref(null)
@@ -207,14 +208,13 @@ function onExportToExcel() {
 
 .logo {
   width: auto;
-  height: 35px;
-  margin-left: 10px;
-  margin-right: 0;
+  height: 24px;
+  margin: 0;
 }
 
-.top-line-wrapper {
+/* .top-line-wrapper {
   margin: 50px 0 0 0;
-}
+} */
 
 .top-line {
   display: flex;
@@ -255,7 +255,7 @@ function onExportToExcel() {
 .export-group {
   display: flex;
   align-items: center;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   padding: 2px 5px;
   /* border-radius: 2px; */
   gap: 5px;
@@ -285,6 +285,7 @@ function onExportToExcel() {
 
 .export-dropdown {
   padding: 0 10px;
+  margin-left: -4px;
   border: none;
 }
 .export-dropdown:disabled {
@@ -328,14 +329,14 @@ function onExportToExcel() {
 }
 
 .grid-wrapper {
-  margin: 4px 10px 0 10px;
+  margin: 0;
   text-align: left;
   min-height: 520px;
 }
 
 .status-msg {
-  margin: 0.5em 10px;
-  font-size: 1rem;
+  margin: 0;
+  font-size: 0.5rem;
   color: #333;
   background: #f1f1f1;
   border-left: 4px solid #2196f3;
@@ -344,12 +345,137 @@ function onExportToExcel() {
 }
 
 .loading-msg {
-  font-size: 1.1rem;
-  margin: 20px;
+  font-size: 0.5rem;
+  margin: 0;
   color: #333;
 }
 
 body {
   background-color: rgb(0, 0, 0);
+}
+
+/* To specify background and height */
+.e-daterangepicker.e-popup .e-range-header {
+  background: beige;
+  height: 80px;
+}
+
+/* To specify color and font size */
+.e-daterangepicker.e-popup .e-range-header .e-start-label,
+.e-daterangepicker.e-popup .e-range-header .e-end-label {
+  font-size: 20px;
+}
+/* To specify background color, color, and border color */
+.e-daterangepicker.e-popup .e-footer {
+  background-color: beige;
+  height: 30px;
+}
+
+@media screen and (orientation: portrait) {
+  body::before {
+    content: 'Please rotate your device to landscape mode.';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: black;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  #app {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .e-daterangepicker.e-popup {
+    width: 100% !important;
+    max-width: 100vw !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  .e-daterangepicker.e-popup .e-calendar-container {
+    flex-direction: column !important;
+    align-items: center;
+  }
+
+  .e-daterangepicker.e-popup .e-calendar {
+    width: 50% !important;
+    max-width: 50vw !important;
+    max-height: min-content !important;
+    font-size: 14px;
+  }
+
+  .e-calendar .e-header .e-title,
+  .e-calendar .e-header span {
+    font-size: 16px;
+  }
+
+  .e-calendar .e-content td span.e-day {
+    font-size: 14px;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  body::before {
+    content: 'Please rotate your device to landscape mode.';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: black;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  #app {
+    display: none;
+  }
+}
+
+.customCSS .e-calendar .e-content .e-selected span.e-day,
+/* csslint allow: adjoining-classes*/
+.customCSS .e-calendar .e-content .e-selected span.e-day:hover,
+/* csslint allow: adjoining-classes*/
+.customCSS .e-calendar .e-content .e-today.e-selected:hover span.e-day,
+/* csslint allow: adjoining-classes*/
+.customCSS .e-calendar .e-content .e-today.e-selected span.e-day,
+/* csslint allow: adjoining-classes*/
+.customCSS .e-calendar .e-content .e-selected:hover span.e-day
+
+/* csslint allow: adjoining-classes*/ {
+  background-color: red;
+}
+
+.customCSS .e-calendar .e-content .e-today span.e-day,
+/* csslint allow: adjoining-classes*/
+.customCSS .e-calendar .e-content .e-focused-date.e-today span.e-day {
+  /* csslint allow: adjoining-classes*/
+  border: 1px solid #35b86b;
+  color: green;
+}
+
+.customCSS .e-calendar .e-content .e-weekend span {
+  /* csslint allow: adjoining-classes*/
+  color: #ff3337;
+}
+
+.customCSS.e-date-range-wrapper .e-input-group-icon.e-icons.e-active,
+/* csslint allow: adjoining-classes*/
+.customCSS .e-btn.e-flat,
+/* csslint allow: adjoining-classes*/
+.customCSS .e-btn.e-flat:hover {
+  /* csslint allow: adjoining-classes*/
+  color: #35b86b;
 }
 </style>

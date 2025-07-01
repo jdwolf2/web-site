@@ -7,6 +7,7 @@
             ref="gridRef"
             id="gridcomp"
             :dataSource="data"
+            :enableAdaptiveUI="false"
             :allowScrolling="true"
             :rowHeight="40"
             :enableAltRow="true"
@@ -19,7 +20,7 @@
             :scrollSettings="scrollSettings"
             :allowPaging="true"
             :pageSettings="pageSettings"
-            :allowGrouping="true"
+            :allowGrouping="false"
             :allowSorting="false"
             :showColumnMenu="true"
             :columnMenuItems="['ColumnChooser', 'Filter']"
@@ -29,7 +30,7 @@
             :allowTextWrap="true"
             :autoFit="false"
             :width="'100%'"
-            :height="'510px'"
+            :height="'210px'"
             :frozenRows="0"
             :frozenColumns="1"
             @headerCellInfo="onHeaderCellInfo"
@@ -104,6 +105,7 @@ const onHeaderCellInfo = (args) => {
   const columnField = args.cell.column.field
   headerCell.style.padding = '0 5px'
   headerCell.style.borderRight = '1px solid white'
+  headerCell.style.height = '20px'
 
   switch (columnField) {
     case 'siteName':
@@ -391,5 +393,47 @@ body {
 
 body {
   background-color: rgb(50, 50, 50);
+}
+
+@media screen and (orientation: landscape) {
+  .e-daterangepicker.e-popup .e-calendar-container {
+    flex-direction: row !important;
+  }
+
+  .e-daterangepicker.e-popup .e-calendar {
+    width: 220px !important;
+    font-size: 12px;
+  }
+
+  .e-daterangepicker.e-popup .e-calendar .e-header,
+  .e-daterangepicker.e-popup .e-calendar .e-title {
+    font-size: 14px !important;
+  }
+
+  .e-daterangepicker.e-popup .e-day,
+  .e-daterangepicker.e-popup .e-week-header {
+    font-size: 12px !important;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  body::before {
+    content: 'Please rotate your device to landscape mode.';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: black;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  #app {
+    display: none;
+  }
 }
 </style>
