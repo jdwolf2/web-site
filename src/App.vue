@@ -442,40 +442,4 @@ body {
     display: none;
   }
 }
-
-.customCSS .e-calendar .e-content .e-selected span.e-day,
-/* csslint allow: adjoining-classes*/
-.customCSS .e-calendar .e-content .e-selected span.e-day:hover,
-/* csslint allow: adjoining-classes*/
-.customCSS .e-calendar .e-content .e-today.e-selected:hover span.e-day,
-/* csslint allow: adjoining-classes*/
-.customCSS .e-calendar .e-content .e-today.e-selected span.e-day,
-/* csslint allow: adjoining-classes*/
-.customCSS .e-calendar .e-content .e-selected:hover span.e-day
-
-/* csslint allow: adjoining-classes*/ {
-  background-color: red;
-}
-
-.customCSS .e-calendar .e-content .e-today span.e-day,
-/* csslint allow: adjoining-classes*/
-.customCSS .e-calendar .e-content .e-focused-date.e-today span.e-day {
-  /* csslint allow: adjoining-classes*/
-  border: 1px solid #35b86b;
-  color: green;
-}
-
-.customCSS .e-calendar .e-content .e-weekend span {
-  /* csslint allow: adjoining-classes*/
-  color: #ff3337;
-}
-
-.customCSS.e-date-range-wrapper .e-input-group-icon.e-icons.e-active,
-/* csslint allow: adjoining-classes*/
-.customCSS .e-btn.e-flat,
-/* csslint allow: adjoining-classes*/
-.customCSS .e-btn.e-flat:hover {
-  /* csslint allow: adjoining-classes*/
-  color: #35b86b;
-}
 </style>

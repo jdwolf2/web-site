@@ -4,7 +4,7 @@ import { Amplify } from '@aws-amplify/core'
 import { Auth } from '@aws-amplify/auth'
 
 // ─── Use static ngrok domain ─────────────────────────────────────────────
-const redirectUri = 'https://wolf.ngrok.app/'
+const redirectUri = 'https://accusaltsitedata.com'
 
 Amplify.configure({
   Auth: {
