@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Grid from './components/Grid.vue' // Adjust if needed
+import Grid from './Grid.vue' // Adjust if needed
 
 export default {
   name: 'App',

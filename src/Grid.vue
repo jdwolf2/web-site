@@ -392,7 +392,7 @@ body {
 }
 
 body {
-  background-color: rgb(50, 50, 50);
+  background-color: black;
 }
 
 @media screen and (orientation: landscape) {
