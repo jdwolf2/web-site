@@ -4,7 +4,7 @@ import { Amplify } from '@aws-amplify/core'
 import { Auth } from '@aws-amplify/auth'
 
 // ─── Use static ngrok domain ─────────────────────────────────────────────
-const redirectUri = 'https://accusaltsitedata.com'
+const redirectUri = 'https://accusalt-mobile.netlify.app/'
 
 Amplify.configure({
   Auth: {
