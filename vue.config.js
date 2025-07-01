@@ -15,17 +15,25 @@
 //   },
 // })
 
-module.exports = {
-  pwa: {
-    name: 'AccuSalt Mobile',
-    themeColor: '#35b86b',
-    msTileColor: '#ffffff',
-    appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black',
+// module.exports = {
+//   pwa: {
+//     name: 'AccuSalt Mobile',
+//     themeColor: '#35b86b',
+//     msTileColor: '#ffffff',
+//     appleMobileWebAppCapable: 'yes',
+//     appleMobileWebAppStatusBarStyle: 'black',
 
-    workboxOptions: {
-      skipWaiting: true,
-      clientsClaim: true,
-    },
-  },
+//     workboxOptions: {
+//       skipWaiting: true,
+//       clientsClaim: true,
+//     },
+//   },
+// }
+pwa: {
+  name: 'AccuSalt',
+  themeColor: '#000000',
+  manifestOptions: {
+    start_url: '/',
+    display: 'standalone'
+  }
 }
