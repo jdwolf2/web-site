@@ -2,33 +2,51 @@
   <div id="app">
     <h1>AccuSalt Mobile</h1>
     <p>Orientation: {{ orientation }}</p>
-    <p>Signed in? {{ isSignedIn }}</p>
-    <Grid v-if="isSignedIn" />
+    <p>Is Landscape? {{ isLandscape }}</p>
+    <p>Signed In: {{ isSignedIn }}</p>
+
+    <div v-if="isLandscape && isSignedIn">
+      <p>✅ Ready to load Grid.vue here</p>
+    </div>
+
+    <div v-else-if="!isLandscape">
+      <p>🔁 Please rotate your device to landscape mode</p>
+    </div>
+
+    <div v-else>
+      <p>🔒 Not signed in</p>
+    </div>
   </div>
 </template>
 
 <script>
-import Grid from './Grid.vue' // Adjust if needed
-
 export default {
   name: 'App',
-  components: { Grid },
   data() {
     return {
-      orientation: screen.orientation?.type || 'unknown',
-      isSignedIn: false, // start with false, then auto-detect
+      isSignedIn: false,
+      isLandscape: false,
+      orientation: '',
     }
   },
   mounted() {
-    // example: if using Amplify Auth
-    import('./useAuth')
-      .then(({ useAuth }) => {
-        const { user } = useAuth()
-        this.isSignedIn = !!user
-      })
-      .catch((err) => {
-        console.error('Auth check failed', err)
-      })
+    // Detect orientation
+    const o = screen.orientation?.type || 'unknown'
+    this.orientation = o
+    this.isLandscape = o.includes('landscape')
+
+    // Simulate signed-in user for now (adjust later for Cognito)
+    this.isSignedIn = true
   },
 }
 </script>
+
+<style>
+body {
+  background: white;
+  color: black;
+  font-family: sans-serif;
+  padding: 2rem;
+  text-align: center;
+}
+</style>
