@@ -1,31 +1,48 @@
-<script>
-export default {
-  name: "App",
-  data() {
-    return {
-      width: 0,
-      height: 0
-    };
-  },
-  computed: {
-    isLandscape() {
-      return this.width > this.height;
-    }
-  },
-  mounted() {
-    window.addEventListener("resize", this.updateWindowSize);
-    this.updateWindowSize();
-    console.log("Mounted - dimensions:", window.innerWidth, window.innerHeight);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.updateWindowSize);
-  },
-  methods: {
-    updateWindowSize() {
-      this.width = window.innerWidth;
-      this.height = window.innerHeight;
-      console.log("Updated size:", this.width, this.height);
-    }
-  }
-};
+<template>
+  <div id="app">
+    <h1>AccuSalt Mobile</h1>
+    <p>Width: {{ width }}</p>
+    <p>Height: {{ height }}</p>
+    <p>Landscape? {{ isLandscape }}</p>
+
+    <div v-if="isLandscape">
+      <p>✅ Landscape mode detected — this is where your grid will load.</p>
+    </div>
+    <div v-else>
+      <p>🔁 Please rotate your device to landscape mode.</p>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+
+const width = ref(window.innerWidth)
+const height = ref(window.innerHeight)
+
+const isLandscape = computed(() => width.value > height.value)
+
+function updateSize() {
+  width.value = window.innerWidth
+  height.value = window.innerHeight
+  console.log('Updated:', width.value, height.value)
+}
+
+onMounted(() => {
+  updateSize()
+  window.addEventListener('resize', updateSize)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateSize)
+})
 </script>
+
+<style>
+body {
+  font-family: sans-serif;
+  background: white;
+  text-align: center;
+  padding: 2rem;
+}
+</style>
