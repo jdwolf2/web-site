@@ -1,46 +1,143 @@
 <template>
-  <div id="app">
-    <h1>AccuSalt Mobile</h1>
-
-    <div v-if="isLandscape">
-      <p>✅ Landscape mode detected — loading grid...</p>
-      <Grid />
-    </div>
-
-    <div v-else>
-      <p>🔁 Please rotate your device to landscape mode.</p>
+  <div class="total-container">
+    <div class="page-container">
+      <div id="table-container">
+        <div id="table-div">
+          <EjsGrid
+            ref="gridRef"
+            id="gridcomp"
+            :dataSource="data"
+            :enableAdaptiveUI="false"
+            :allowScrolling="true"
+            :rowHeight="40"
+            :enableAltRow="true"
+            :allowReordering="false"
+            :allowExcelExport="true"
+            :columnQueryMode="'ExcludeHidden'"
+            :allowPdfExport="false"
+            :showColumnChooser="false"
+            :enableScrolling="true"
+            :scrollSettings="scrollSettings"
+            :allowPaging="true"
+            :pageSettings="pageSettings"
+            :allowGrouping="false"
+            :allowSorting="false"
+            :showColumnMenu="true"
+            :columnMenuItems="['ColumnChooser', 'Filter']"
+            :groupSettings="groupOptions"
+            :allowFiltering="true"
+            :filterSettings="filterSettings"
+            :allowTextWrap="true"
+            :autoFit="false"
+            :width="'100%'"
+            :height="'210px'"
+            :frozenRows="0"
+            :frozenColumns="1"
+            @headerCellInfo="onHeaderCellInfo"
+          >
+            <EColumns>
+              <EColumn
+                v-for="col in filteredColumns"
+                :key="col.field"
+                :field="col.field"
+                :headerText="col.headerText"
+                :textAlign="col.textAlign"
+                :width="col.width"
+              />
+            </EColumns>
+          </EjsGrid>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import Grid from './Grid.vue' // Adjust path if needed
+import { ref, onMounted, watch, provide, computed } from 'vue'
+import { columns } from './assets/columns.js'
 
-const width = ref(window.innerWidth)
-const height = ref(window.innerHeight)
-const isLandscape = computed(() => width.value > height.value)
+import {
+  GridComponent as EjsGrid,
+  ColumnDirective as EColumn,
+  ColumnsDirective as EColumns,
+  Group,
+  Sort,
+  Resize,
+  ColumnMenu,
+  Filter,
+  Page,
+  ExcelExport,
+  Freeze // ✅ Add this!
+} from '@syncfusion/ej2-vue-grids'
 
-function updateSize() {
-  width.value = window.innerWidth
-  height.value = window.innerHeight
-}
+// ✅ Inject the Freeze module
+provide('grid', [Group, Sort, Resize, ColumnMenu, Filter, Page, ExcelExport, Freeze])
+
+const props = defineProps({
+  data: {
+    type: Array,
+    default: () => [],
+  },
+})
+
+const scrollSettings = { width: '100%', height: '100%' }
+const groupOptions = { showGroupedColumn: true }
+const filterSettings = { type: 'CheckBox' }
+const pageSettings = ref({ pageSize: 100, pageSizes: false, currentPage: 1 })
+
+const selectedColumns = ref(columns.map((col) => col.field))
+const displayedColumns = ref(columns)
+const filteredColumns = computed(() =>
+  displayedColumns.value.filter((col) => col.visible !== false)
+)
+
+const gridRef = ref(null)
 
 onMounted(() => {
-  updateSize()
-  window.addEventListener('resize', updateSize)
+  gridRef.value?.autoFitColumns()
 })
 
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', updateSize)
+watch(selectedColumns, () => {
+  displayedColumns.value = columns.filter((col) =>
+    selectedColumns.value.includes(col.field)
+  )
+  gridRef.value?.autoFitColumns()
 })
+
+const onHeaderCellInfo = (args) => {
+  const headerCell = args.node
+  const columnField = args.cell.column.field
+  headerCell.style.padding = '0 5px'
+  headerCell.style.borderRight = '1px solid white'
+  headerCell.style.height = '20px'
+
+  switch (columnField) {
+    case 'siteName':
+    case 'Truck':
+    case 'Route':
+      headerCell.style.background = 'black'
+      break
+    case 'StartDate':
+    case 'StartTime':
+    case 'StopTime':
+    case 'Duration':
+      headerCell.style.background = 'rgb(0,0,150)'
+      break
+    case 'Total':
+    case 'Rate':
+      headerCell.style.background = 'darkgreen'
+      break
+    case 'Lat':
+    case 'Lon':
+      headerCell.style.background = 'rgb(100,0,0)'
+      break
+    case 'Temp':
+      headerCell.style.background = 'lightblue'
+      break
+  }
+}
 </script>
 
 <style>
-body {
-  font-family: sans-serif;
-  background: white;
-  text-align: center;
-  padding: 2rem;
-}
+/* Keep your existing styles here */
 </style>
