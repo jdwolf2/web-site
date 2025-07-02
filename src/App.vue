@@ -368,17 +368,7 @@ function onExportToExcel() {
   height: 30px;
 }
 
-  .e-daterangepicker.e-popup .e-calendar-container {
-    flex-direction: column !important;
-    align-items: center;
-  }
 
-  .e-daterangepicker.e-popup .e-calendar {
-    width: 50% !important;
-    max-width: 50vw !important;
-    max-height: min-content !important;
-    font-size: 14px;
-  }
 
   .e-calendar .e-header .e-title,
   .e-calendar .e-header span {
