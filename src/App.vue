@@ -350,9 +350,6 @@ function onExportToExcel() {
   color: #333;
 }
 
-body {
-  background-color: rgb(0, 0, 0);
-}
 
 /* To specify background and height */
 .e-daterangepicker.e-popup .e-range-header {
@@ -391,4 +388,16 @@ body {
   .e-calendar .e-content td span.e-day {
     font-size: 14px;
   }
+
+  body {
+  background-color: rgb(0, 0, 0);
+}
+
+  #app {
+    display: none;
+  }
+}
+
+  
+
 </style>
