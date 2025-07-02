@@ -438,8 +438,8 @@ body {
     text-align: center;
   }
 
-  #app {
+/*   #app {
     display: none;
-  }
+  } */
 }
 </style>
