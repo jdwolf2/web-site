@@ -371,35 +371,6 @@ body {
   height: 30px;
 }
 
-@media screen and (orientation: portrait) {
-  body::before {
-    content: 'Please rotate your device to landscape mode.';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 9999;
-    inset: 0;
-    background: black;
-    color: white;
-    font-size: 1.5rem;
-    padding: 1rem;
-    text-align: center;
-  }
-
-  #app {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .e-daterangepicker.e-popup {
-    width: 100% !important;
-    max-width: 100vw !important;
-    left: 0 !important;
-    right: 0 !important;
-  }
-
   .e-daterangepicker.e-popup .e-calendar-container {
     flex-direction: column !important;
     align-items: center;
@@ -420,26 +391,4 @@ body {
   .e-calendar .e-content td span.e-day {
     font-size: 14px;
   }
-}
-
-@media screen and (orientation: portrait) {
-  body::before {
-    content: 'Please rotate your device to landscape mode.';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 9999;
-    inset: 0;
-    background: black;
-    color: white;
-    font-size: 1.5rem;
-    padding: 1rem;
-    text-align: center;
-  }
-
-/*   #app {
-    display: none;
-  } */
-}
 </style>
