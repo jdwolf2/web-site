@@ -361,34 +361,6 @@ function onExportToExcel() {
 }
 
 
-/* To specify background and height */
-.e-daterangepicker.e-popup .e-range-header {
-  background: beige;
-  height: 80px;
-}
-
-/* To specify color and font size */
-.e-daterangepicker.e-popup .e-range-header .e-start-label,
-.e-daterangepicker.e-popup .e-range-header .e-end-label {
-  font-size: 20px;
-}
-/* To specify background color, color, and border color */
-.e-daterangepicker.e-popup .e-footer {
-  background-color: beige;
-  height: 30px;
-}
-
-
-
-  .e-calendar .e-header .e-title,
-  .e-calendar .e-header span {
-    font-size: 16px;
-  }
-
-  .e-calendar .e-content td span.e-day {
-    font-size: 14px;
-  }
-
   body {
   background-color: rgb(0, 0, 0);
 }
