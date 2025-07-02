@@ -392,10 +392,10 @@ body {
 }
 
 body {
-  background-color: rgb(50, 50, 50);
+  background-color: rgb(0, 0, 0);
 }
 
-@media screen and (orientation: landscape) {
+/* @media screen and (orientation: landscape) {
   .e-daterangepicker.e-popup .e-calendar-container {
     flex-direction: row !important;
   }
@@ -414,9 +414,9 @@ body {
   .e-daterangepicker.e-popup .e-week-header {
     font-size: 12px !important;
   }
-}
+} */
 
-@media screen and (orientation: portrait) {
+/* @media screen and (orientation: portrait) {
   body::before {
     content: 'Please rotate your device to landscape mode.';
     display: flex;
@@ -430,7 +430,7 @@ body {
     font-size: 1.5rem;
     padding: 1rem;
     text-align: center;
-  }
+  } */
 
   #app {
     display: none;
