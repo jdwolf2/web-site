@@ -190,19 +190,9 @@ function onExportToExcel() {
 
   grid.excelExport(exportProps)
 }
-</script>
+</script scoped>
 
 <style scoped>
-@import '~@syncfusion/ej2-base/styles/material.css';
-@import '~@syncfusion/ej2-buttons/styles/material.css';
-@import '~@syncfusion/ej2-calendars/styles/material.css';
-@import '~@syncfusion/ej2-dropdowns/styles/material.css';
-@import '~@syncfusion/ej2-inputs/styles/material.css';
-@import '~@syncfusion/ej2-navigations/styles/material.css';
-@import '~@syncfusion/ej2-popups/styles/material.css';
-@import '~@syncfusion/ej2-splitbuttons/styles/material.css';
-@import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
-  
 .outer-wrapper {
   display: flex;
   justify-content: center;
@@ -218,13 +208,14 @@ function onExportToExcel() {
 
 .logo {
   width: auto;
-  height: 24px;
-  margin: 0;
+  height: 35px;
+  margin-left: 10px;
+  margin-right: 0;
 }
 
-/* .top-line-wrapper {
+.top-line-wrapper {
   margin: 50px 0 0 0;
-} */
+}
 
 .top-line {
   display: flex;
@@ -240,7 +231,7 @@ function onExportToExcel() {
 .export-dropdown {
   height: 25px;
   font-size: 14px;
-  /* border-radius: 5px; */
+  border-radius: 5px;
   white-space: nowrap;
   margin: 0;
 }
@@ -265,9 +256,9 @@ function onExportToExcel() {
 .export-group {
   display: flex;
   align-items: center;
-  /* border: 1px solid white; */
+  border: 2px solid white;
   padding: 2px 5px;
-  /* border-radius: 2px; */
+  border-radius: 6px;
   gap: 5px;
 }
 .export-group.disabled {
@@ -295,7 +286,6 @@ function onExportToExcel() {
 
 .export-dropdown {
   padding: 0 10px;
-  margin-left: -4px;
   border: none;
 }
 .export-dropdown:disabled {
@@ -331,7 +321,7 @@ function onExportToExcel() {
 .date-display {
   height: 25px;
   font-size: 16px;
-  /* border-radius: 5px; */
+  border-radius: 5px;
   border: 1px solid #bdbdbd;
   background: #f5f5f5;
   padding: 0 12px;
@@ -339,35 +329,26 @@ function onExportToExcel() {
 }
 
 .grid-wrapper {
-  margin: 0;
+  margin: 4px 10px 0 10px;
   text-align: left;
   min-height: 520px;
 }
 
 .status-msg {
-  margin: 0;
-  font-size: 0.5rem;
+  margin: 0.5em 10px;
+  font-size: 1rem;
   color: #333;
   background: #f1f1f1;
   border-left: 4px solid #2196f3;
   padding: 8px 12px;
-  /* border-radius: 4px; */
+  border-radius: 4px;
 }
 
 .loading-msg {
-  font-size: 0.5rem;
-  margin: 0;
+  font-size: 1.1rem;
+  margin: 20px;
   color: #333;
 }
+</style>
 
-
-  body {
-  background-color: rgb(0, 0, 0);
-}
-
-  #app {
-    display: none;
-  }
-
-  </style>
 
