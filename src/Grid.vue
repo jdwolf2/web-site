@@ -228,12 +228,7 @@ const onHeaderCellInfo = (args) => {
   height: max-content;
 }
 
-@media (max-width: 800px) {
-  .e-gridheader,
-  .e-gridcontent {
-    overflow: auto;
-  }
-}
+
 
 .custom-filter-popup {
   max-height: 800px;
