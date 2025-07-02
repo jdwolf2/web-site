@@ -398,8 +398,4 @@ function onExportToExcel() {
   }
 
   </style>
-}
 
-  
-
-</style>
