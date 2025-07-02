@@ -212,6 +212,10 @@ function onExportToExcel() {
   margin: 0;
 }
 
+/* .top-line-wrapper {
+  margin: 50px 0 0 0;
+} */
+
 .top-line {
   display: flex;
   align-items: center;
@@ -226,6 +230,7 @@ function onExportToExcel() {
 .export-dropdown {
   height: 25px;
   font-size: 14px;
+  /* border-radius: 5px; */
   white-space: nowrap;
   margin: 0;
 }
@@ -316,6 +321,7 @@ function onExportToExcel() {
 .date-display {
   height: 25px;
   font-size: 16px;
+  /* border-radius: 5px; */
   border: 1px solid #bdbdbd;
   background: #f5f5f5;
   padding: 0 12px;
@@ -335,6 +341,7 @@ function onExportToExcel() {
   background: #f1f1f1;
   border-left: 4px solid #2196f3;
   padding: 8px 12px;
+  /* border-radius: 4px; */
 }
 
 .loading-msg {
@@ -347,6 +354,7 @@ body {
   background-color: rgb(0, 0, 0);
 }
 
+
 .e-daterangepicker.e-popup .e-footer {
   background-color: beige;
   height: 30px;
@@ -354,6 +362,17 @@ body {
 
 
 
+.e-daterangepicker.e-popup .e-calendar-container {
+  flex-direction: column !important;
+  align-items: center;
+}
+
+.e-daterangepicker.e-popup .e-calendar {
+  width: 50% !important;
+  max-width: 50vw !important;
+  max-height: min-content !important;
+  font-size: 14px;
+}
 
 .e-calendar .e-header .e-title,
 .e-calendar .e-header span {
@@ -363,6 +382,24 @@ body {
 .e-calendar .e-content td span.e-day {
   font-size: 14px;
 }
+
+/* 
+@media screen and (orientation: portrait) {
+  body::before {
+    content: 'Please rotate your device to landscape mode.';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: black;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+ */
 
 #app {
   display: none;
