@@ -354,19 +354,92 @@ body {
   background-color: rgb(0, 0, 0);
 }
 
-/* 
+/* To specify background and height */
+.e-daterangepicker.e-popup .e-range-header {
+  background: beige;
+  height: 80px;
+}
+
+/* To specify color and font size */
+.e-daterangepicker.e-popup .e-range-header .e-start-label,
+.e-daterangepicker.e-popup .e-range-header .e-end-label {
+  font-size: 20px;
+}
+/* To specify background color, color, and border color */
+.e-daterangepicker.e-popup .e-footer {
+  background-color: beige;
+  height: 30px;
+}
+
+@media screen and (orientation: portrait) {
+  body::before {
+    content: 'Please rotate your device to landscape mode.';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: black;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
   #app {
-  display: none;
-} */
-
-.e-calendar .e-header .e-title,
-.e-calendar .e-header span {
-  font-size: 16px;
+    display: none;
+  }
 }
 
-.e-calendar .e-content td span.e-day {
-  font-size: 14px;
+@media (max-width: 768px) {
+  .e-daterangepicker.e-popup {
+    width: 100% !important;
+    max-width: 100vw !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  .e-daterangepicker.e-popup .e-calendar-container {
+    flex-direction: column !important;
+    align-items: center;
+  }
+
+  .e-daterangepicker.e-popup .e-calendar {
+    width: 50% !important;
+    max-width: 50vw !important;
+    max-height: min-content !important;
+    font-size: 14px;
+  }
+
+  .e-calendar .e-header .e-title,
+  .e-calendar .e-header span {
+    font-size: 16px;
+  }
+
+  .e-calendar .e-content td span.e-day {
+    font-size: 14px;
+  }
 }
 
+@media screen and (orientation: portrait) {
+  body::before {
+    content: 'Please rotate your device to landscape mode.';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: black;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
 
+  #app {
+    display: none;
+  }
+}
 </style>
