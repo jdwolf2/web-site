@@ -432,8 +432,7 @@ body {
     text-align: center;
   } */
 
-  #app {
-    display: none;
-  }
+#app {
+  display: none;
 }
 </style>
