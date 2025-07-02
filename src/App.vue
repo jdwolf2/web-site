@@ -351,7 +351,7 @@ function onExportToExcel() {
 }
 
 body {
-  background-color: rgb(100, 100, 100);
+  background-color: rgb(20, 20, 20);
 }
 
 /* To specify background and height */
