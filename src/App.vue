@@ -354,7 +354,7 @@ body {
   background-color: rgb(0, 0, 0);
 }
 
-To specify background and height
+
 /* .e-daterangepicker.e-popup .e-range-header {
   background: beige;
   height: 80px;
@@ -393,14 +393,14 @@ To specify background and height
   }
 
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .e-daterangepicker.e-popup {
     width: 100% !important;
     max-width: 100vw !important;
     left: 0 !important;
     right: 0 !important;
   }
-
+ */
   .e-daterangepicker.e-popup .e-calendar-container {
     flex-direction: column !important;
     align-items: center;
@@ -421,8 +421,8 @@ To specify background and height
   .e-calendar .e-content td span.e-day {
     font-size: 14px;
   }
-}
 
+/* 
 @media screen and (orientation: portrait) {
   body::before {
     content: 'Please rotate your device to landscape mode.';
@@ -438,6 +438,8 @@ To specify background and height
     padding: 1rem;
     text-align: center;
   }
+ */
+  
 
   #app {
     display: none;
