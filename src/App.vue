@@ -355,6 +355,12 @@ function onExportToExcel() {
   @import '~@syncfusion/ej2-popups/styles/material.css';
   @import '~@syncfusion/ej2-lists/styles/material.css';
   @import "~@syncfusion/ej2-vue-calendars/styles/material.css"
+.e-calendar-content-table {
+  position: absolute;
+  top: -200px;
+}
+
+  
 </style>
 
 
