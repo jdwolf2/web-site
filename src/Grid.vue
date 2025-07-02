@@ -145,9 +145,7 @@ const onHeaderCellInfo = (args) => {
 @import '~@syncfusion/ej2-splitbuttons/styles/material.css';
 @import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
 
-body {
-  background-color: rgb(0, 0, 0);
-}
+
 
 .export-controls {
   display: flex;
@@ -391,9 +389,6 @@ body {
   border: 7px solid yellow;
 }
 
-body {
-  background-color: rgb(100, 100, 100);
-}
 
 /* @media screen and (orientation: landscape) {
   .e-daterangepicker.e-popup .e-calendar-container {
