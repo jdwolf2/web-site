@@ -444,5 +444,4 @@ body {
   #app {
     display: none;
   }
-}
 </style>
