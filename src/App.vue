@@ -391,7 +391,7 @@ To specify background and height
   #app {
     display: none;
   }
-}
+
 
 @media (max-width: 768px) {
   .e-daterangepicker.e-popup {
