@@ -354,8 +354,8 @@ body {
   background-color: rgb(0, 0, 0);
 }
 
-/* To specify background and height */
-.e-daterangepicker.e-popup .e-range-header {
+To specify background and height
+/* .e-daterangepicker.e-popup .e-range-header {
   background: beige;
   height: 80px;
 }
@@ -369,9 +369,9 @@ body {
 .e-daterangepicker.e-popup .e-footer {
   background-color: beige;
   height: 30px;
-}
+} */
 
-@media screen and (orientation: portrait) {
+/* @media screen and (orientation: portrait) {
   body::before {
     content: 'Please rotate your device to landscape mode.';
     display: flex;
@@ -386,6 +386,7 @@ body {
     padding: 1rem;
     text-align: center;
   }
+*/
 
   #app {
     display: none;
