@@ -396,6 +396,8 @@ function onExportToExcel() {
   #app {
     display: none;
   }
+
+  </style>
 }
 
   
