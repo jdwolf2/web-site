@@ -426,6 +426,8 @@ const onHeaderCellInfo = (args) => {
     padding: 1rem;
     text-align: center;
   } */
-
+body {
+  background-color: rgb(0, 0, 0);
+}
 
 </style>
