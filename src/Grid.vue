@@ -432,7 +432,5 @@ body {
     text-align: center;
   } */
 
-#app {
-  display: none;
-}
+
 </style>
