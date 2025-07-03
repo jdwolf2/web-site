@@ -36,7 +36,6 @@ export default {
   },
   computed: {
     computedValue() {
-      // Always provide the picker a {startDate, endDate}
       return {
         startDate: this.startUnix ? new Date(this.startUnix * 1000) : null,
         endDate: this.stopUnix ? new Date(this.stopUnix * 1000) : null,
@@ -45,7 +44,6 @@ export default {
   },
   methods: {
     openPicker() {
-      // Show the calendar programmatically
       if (this.$refs.drp && typeof this.$refs.drp.show === 'function') {
         this.$refs.drp.show()
       }
@@ -60,9 +58,10 @@ export default {
       this.$emit('update:start', startUnix)
       this.$emit('update:stop', endUnix)
     },
+    onOpen(args) {
+      args.popup.position = { X: "18px", Y: "95px" }
+    },
   },
-
-onOpen(args) {  
-    args.popup.position = { X: "18px", Y: "95px" } // changing popup position  
-  }  ,
+}
 </script>
+
