@@ -61,7 +61,6 @@ export default {
       this.$emit('update:stop', endUnix)
     },
   },
-}
 
 onOpen(args) {  
     args.popup.position = { X: "18px", Y: "95px" }; // changing popup position  
