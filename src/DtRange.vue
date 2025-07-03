@@ -2,6 +2,7 @@
   <div style="display: none">
     <EjsDaterangepicker
       ref="drp"
+      :open="onOpen"
       :watermark="waterMark"
       :value="computedValue"
       format="MMM d, yyyy"
@@ -61,4 +62,10 @@ export default {
     },
   },
 }
+
+  const onOpen = (args) => {
+  // Example: Set the popup to open at the top-left corner   
+  args.popup.element.style.left = '18px';
+  args.popup.element.style.top = '95px';
+};
 </script>
