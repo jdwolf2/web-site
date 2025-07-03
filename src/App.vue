@@ -230,8 +230,6 @@ function onExportToExcel() {
 .export-dropdown {
   height: 25px;
   font-size: 14px;
-  border-radius: 5px;
-  white-space: nowrap;
   margin: 0;
 }
 
@@ -257,7 +255,6 @@ function onExportToExcel() {
   align-items: center;
   border: 2px solid white;
   padding: 2px 5px;
-  border-radius: 6px;
   gap: 5px;
 }
 .export-group.disabled {
@@ -320,7 +317,6 @@ function onExportToExcel() {
 .date-display {
   height: 25px;
   font-size: 16px;
-  border-radius: 5px;
   border: 1px solid #bdbdbd;
   background: #f5f5f5;
   padding: 0 12px;
@@ -340,7 +336,6 @@ function onExportToExcel() {
   background: #f1f1f1;
   border-left: 4px solid #2196f3;
   padding: 8px 12px;
-  border-radius: 4px;
 }
 
 .loading-msg {
