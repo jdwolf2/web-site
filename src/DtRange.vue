@@ -1,22 +1,5 @@
-<template>
-  <div style="display: none">
-    <EjsDaterangepicker
-      ref="drp"
-      :open="onOpen"
-      :watermark="waterMark"
-      :value="computedValue"
-      format="MMM d, yyyy"
-      separator=" to "
-      :allowEdit="false"
-      :openOnFocus="false"
-      :showClearButton="false"
-      :autoFit="true"
-      :responsive="true"
-      :fullScreenMode="false"
-      @change="handleChange"
-    />
-  </div>
-</template>
+
+
 <template>
   <div style="display: none">
     <EjsDaterangepicker
