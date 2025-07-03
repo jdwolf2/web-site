@@ -191,7 +191,7 @@ function onExportToExcel() {
 }
 </script>
 
-<style >
+<style>
 .outer-wrapper {
   display: flex;
   justify-content: center;
@@ -230,6 +230,7 @@ function onExportToExcel() {
 .export-dropdown {
   height: 25px;
   font-size: 14px;
+  border-radius: 0;
   margin: 0;
 }
 
@@ -268,15 +269,18 @@ function onExportToExcel() {
   border: none;
   cursor: pointer;
   padding: 0 10px;
+  border-radius: 0;
 }
 .export-button:hover:enabled {
   background: #125da4;
   color: white;
+  border-radius: 0;
 }
 .export-button:disabled {
   background-color: gray;
   color: white;
   cursor: not-allowed;
+  border-radius: 0;
   opacity: 0.6;
 }
 
@@ -351,9 +355,7 @@ function onExportToExcel() {
   z-index: 10000 !important;
 }
 
-*{
-border-radius: 0;
+* {
+  border-radius: 0;
 }
-
-  
 </style>
