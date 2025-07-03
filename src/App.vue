@@ -345,6 +345,9 @@ function onExportToExcel() {
 }
 
 .e-daterangepicker.e-popup {
-  transform: translate(18px, 95px) !important;
+  position: fixed !important;
+  left: 40px !important;
+  top: 95px !important;
+  z-index: 10000 !important;
 }
 </style>
