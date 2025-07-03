@@ -191,7 +191,7 @@ function onExportToExcel() {
 }
 </script>
 
-<style scoped>
+<style >
 .outer-wrapper {
   display: flex;
   justify-content: center;
@@ -350,4 +350,8 @@ function onExportToExcel() {
   top: 95px !important;
   z-index: 10000 !important;
 }
+
+
+
+  
 </style>
