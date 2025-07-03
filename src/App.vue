@@ -348,4 +348,10 @@ function onExportToExcel() {
   margin: 20px;
   color: #333;
 }
+
+.e-daterangepicker .e-popup e-control .e-lib .e-popup-open .e-keyboard {
+  left: 18px !important;
+  top: 95px !important;
+}
+  
 </style>
