@@ -144,7 +144,7 @@ const onHeaderCellInfo = (args) => {
 @import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
 
 body {
-  background-color: rgb(80, 80, 80);
+  background-color: rgb(40, 40, 40);
 }
 
 .export-controls {
