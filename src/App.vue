@@ -351,7 +351,9 @@ function onExportToExcel() {
   z-index: 10000 !important;
 }
 
-
+*{
+border-radius: 0;
+}
 
   
 </style>
