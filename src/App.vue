@@ -344,9 +344,9 @@ function onExportToExcel() {
   color: #333;
 }
 
-.e-daterangepicker .e-popup e-control .e-lib .e-popup-open .e-keyboard {
-  left: 18px !important;
-  top: 95px !important;
-}
-  
+/* Add this in App.vue or styles.css */
+.e-popup.e-popup-open.e-control.e-daterangepicker {
+  left: 18px !important;   /* horizontal position */
+  top: 95px !important;   /* vertical position */
+} 
 </style>
