@@ -63,6 +63,6 @@ export default {
   },
 
 onOpen(args) {  
-    args.popup.position = { X: "18px", Y: "95px" }; // changing popup position  
-  }  
+    args.popup.position = { X: "18px", Y: "95px" } // changing popup position  
+  }  ,
 </script>
