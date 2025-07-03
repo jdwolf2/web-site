@@ -63,10 +63,7 @@ export default {
   },
 }
 
-  const onOpen = (args) => {
-  // Example: Set the popup to open at the top-left corner 
-  args.popup.element.style.position = 'absolute';
-  args.popup.element.style.left = '18px';
-  args.popup.element.style.top = '95px';
-};
+onOpen(args) {  
+    args.popup.position = { X: "18px", Y: "95px" }; // changing popup position  
+  }  
 </script>
