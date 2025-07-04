@@ -31,7 +31,7 @@
             :width="'100%'"
             :height="'510px'"
             :frozenRows="0"
-            :frozenColumns="1"
+
             @headerCellInfo="onHeaderCellInfo"
           >
             <EColumns>
