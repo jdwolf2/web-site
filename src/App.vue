@@ -3,25 +3,30 @@
     <div class="app-container">
       <div class="top-line-wrapper">
         <div class="top-line">
+          <!-- Line 1: Logo -->
           <img src="./assets/tableLogo.jpg" alt="AccuSalt Logo" class="logo" />
 
-          <button
-            @click="triggerDateRange"
-            class="select-date"
-            :disabled="!isAuthenticated || isLoading"
-          >
-            {{ isMobileWidth ? 'Dates' : 'Select Date Range' }}
-          </button>
+          <!-- Line 2: Dates + Input -->
+          <div class="date-group">
+            <button
+              @click="triggerDateRange"
+              class="select-date"
+              :disabled="!isAuthenticated || isLoading"
+            >
+              {{ isMobileWidth ? 'Dates' : 'Select Date Range' }}
+            </button>
 
-          <input
-            type="text"
-            class="date-display"
-            :value="isAuthenticated ? dateRangeDisplay : ''"
-            :placeholder="!isAuthenticated ? 'Sign in to select dates' : ''"
-            readonly
-            :disabled="!isAuthenticated"
-          />
+            <input
+              type="text"
+              class="date-display"
+              :value="isAuthenticated ? dateRangeDisplay : ''"
+              :placeholder="!isAuthenticated ? 'Sign in to select dates' : ''"
+              readonly
+              :disabled="!isAuthenticated"
+            />
+          </div>
 
+          <!-- Line 3: Export group -->
           <div
             class="export-group"
             :class="{
@@ -47,6 +52,7 @@
             </select>
           </div>
 
+          <!-- Line 3: Auth buttons -->
           <button
             class="sign-in"
             v-if="!isAuthenticated"
@@ -62,6 +68,7 @@
             Sign out
           </button>
 
+          <!-- Hidden calendar control -->
           <DtRange
             ref="dtRangeRef"
             :startUnix="startDate"
@@ -104,21 +111,13 @@ onMounted(() => {
   if (typeof checkAuth === 'function') checkAuth()
 })
 
-// 📱 Mobile Width Check
 const isMobileWidth = ref(window.innerWidth < 1000)
-
 function updateWidth() {
   isMobileWidth.value = window.innerWidth < 1000
 }
+onMounted(() => window.addEventListener('resize', updateWidth))
+onUnmounted(() => window.removeEventListener('resize', updateWidth))
 
-onMounted(() => {
-  window.addEventListener('resize', updateWidth)
-})
-onUnmounted(() => {
-  window.removeEventListener('resize', updateWidth)
-})
-
-// 🔐 Auth actions
 function onSignInClick() {
   if (typeof signIn === 'function') signIn()
 }
@@ -437,6 +436,8 @@ body {
     width: auto;
   }
 }
+
+
 @media (max-width: 768px) and (orientation: portrait) {
   .top-line {
     display: flex;
@@ -482,4 +483,5 @@ body {
     margin-top: 4px;
   }
 }
+
 </style>
