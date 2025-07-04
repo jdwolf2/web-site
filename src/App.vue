@@ -530,10 +530,12 @@ media (max-width: 768px) and (orientation: portrait) {
   }
 }
 
+
+</style>
+<style> 
 body {
   margin: 0;
   padding: 0;
   background-color: rgb(40, 40, 40);
 }
-
 </style>
