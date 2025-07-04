@@ -170,7 +170,7 @@ body {
   padding: 0;
   background-color: rgb(40, 40, 40);
 }
-@media (max-width: 1000px) {
+@media (max-width: 1300px) {
   .top-line-wrapper {
     margin: 0;
   }
@@ -196,5 +196,32 @@ body {
   .select-date {
     order: 2;
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+  .top-line {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  /* Group the Dates button and input on same row */
+  .select-date {
+    order: 1;
+    flex: 0 0 auto;
+    margin-right: 8px;
+  }
+
+  .date-display {
+    order: 2;
+    flex: 1 1 auto;
+    min-width: 160px;
+  }
+
+  /* Keep them on the same row */
+  .select-date,
+  .date-display {
+    display: inline-block;
+    width: auto;
   }
 }
