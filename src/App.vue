@@ -519,6 +519,7 @@ media (max-width: 768px) and (orientation: portrait) {
   .export-group {
     display: flex;
     gap: 4px;
+    width:min-content;
     flex: 1 1 auto;
   }
 
@@ -526,6 +527,7 @@ media (max-width: 768px) and (orientation: portrait) {
   .sign-out {
     margin-left: auto;
     flex-shrink: 0;
+    align:center;
     white-space: nowrap;
   }
 }
