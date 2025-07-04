@@ -10,7 +10,7 @@
             class="select-date"
             :disabled="!isAuthenticated || isLoading"
           >
-            Select Date Range
+            dogs are us
           </button>
 
           <input
