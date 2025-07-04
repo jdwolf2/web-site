@@ -208,3 +208,278 @@ function onExportToExcel() {
   grid.excelExport(exportProps)
 }
 </script>
+
+<style scoped>
+.outer-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1500px;
+  font-family: Arial, sans-serif;
+}
+
+.logo {
+  width: auto;
+  height: 35px;
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+.top-line-wrapper {
+  margin: 20px 0 0 0;
+}
+
+.top-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.select-date,
+.sign-in,
+.sign-out,
+.export-button,
+.export-dropdown {
+  height: 25px;
+  font-size: 14px;
+  border-radius: 0;
+  margin: 0;
+}
+
+.select-date {
+  background: lightblue;
+  color: black;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+}
+.select-date:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+.select-date:hover:enabled {
+  background: #125da4;
+  color: white;
+}
+
+.export-group {
+  display: flex;
+  align-items: center;
+  border: 2px solid white;
+  padding: 2px 5px;
+  gap: 5px;
+}
+.export-group.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.export-button {
+  background: lightblue;
+  color: black;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+  border-radius: 0;
+}
+.export-button:hover:enabled {
+  background: #125da4;
+  color: white;
+  border-radius: 0;
+}
+.export-button:disabled {
+  background-color: gray;
+  color: white;
+  cursor: not-allowed;
+  border-radius: 0;
+  opacity: 0.6;
+}
+
+.export-dropdown {
+  padding: 0 10px;
+  border: none;
+}
+.export-dropdown:disabled {
+  background-color: #ccc;
+  color: #666;
+  opacity: 0.6;
+}
+
+.sign-in {
+  background: lightgreen;
+  color: black;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+}
+.sign-in:hover {
+  background: green;
+  color: white;
+}
+
+.sign-out {
+  background: lightyellow;
+  color: black;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+}
+.sign-out:hover {
+  background: yellow;
+  color: black;
+}
+
+.date-display {
+  height: 25px;
+  font-size: 16px;
+  border: 1px solid #bdbdbd;
+  background: #f5f5f5;
+  padding: 0 12px;
+  min-width: 210px;
+}
+
+.grid-wrapper {
+  margin: 4px 10px 0 10px;
+  text-align: left;
+  min-height: 520px;
+}
+
+.status-msg {
+  margin: 0.5em 10px;
+  font-size: 1rem;
+  color: #333;
+  background: #f1f1f1;
+  border-left: 4px solid #2196f3;
+  padding: 8px 12px;
+}
+
+.loading-msg {
+  font-size: 1.1rem;
+  margin: 20px;
+  color: #333;
+}
+
+.e-daterangepicker.e-popup {
+  position: fixed !important;
+  left: 18px !important;
+  top: 95px !important;
+  z-index: 10000 !important;
+}
+
+* {
+  border-radius: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(40, 40, 40);
+}
+@media (max-width: 1300px) {
+  .top-line-wrapper {
+    margin: 0;
+  }
+
+  .logo {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+  .top-line {
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .date-display {
+    order: 1;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .select-date {
+    order: 2;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+  .top-line {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  /* Group the Dates button and input on same row */
+  .select-date {
+    order: 1;
+    flex: 0 0 auto;
+    margin-right: 8px;
+  }
+
+  .date-display {
+    order: 2;
+    flex: 1 1 auto;
+    min-width: 160px;
+  }
+
+  /* Keep them on the same row */
+  .select-date,
+  .date-display {
+    display: inline-block;
+    width: auto;
+  }
+}
+@media (max-width: 768px) and (orientation: portrait) {
+  .top-line {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .logo {
+    order: 1;
+    margin-left: 10px;
+  }
+
+  .date-group {
+    order: 2;
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    padding-left: 10px;
+  }
+
+  .select-date,
+  .date-display {
+    flex: 1 1 auto;
+  }
+
+  .export-group,
+  .sign-in,
+  .sign-out {
+    order: 3;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    padding-left: 10px;
+  }
+
+  .export-group {
+    flex-wrap: wrap;
+  }
+
+  .sign-in,
+  .sign-out {
+    margin-top: 4px;
+  }
+}
+</style>
