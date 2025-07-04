@@ -13,7 +13,7 @@
       :showClearButton="false"
       :autoFit="true"
       :responsive="true"
-      :fullScreenMode="false"
+      :fullScreenMode="true"
       @change="handleChange"
       @open="onOpen"
     />
