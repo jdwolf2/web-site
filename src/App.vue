@@ -208,12 +208,12 @@ function onExportToExcel() {
 .logo {
   width: auto;
   height: 35px;
-  margin-left: 10px;
-  margin-right: 0;
+  margin: 0;
+
 }
 
 .top-line-wrapper {
-  margin: 50px 0 0 0;
+  margin: 0;
 }
 
 .top-line {
@@ -328,7 +328,7 @@ function onExportToExcel() {
 }
 
 .grid-wrapper {
-  margin: 4px 10px 0 10px;
+  margin: 0;
   text-align: left;
   min-height: 520px;
 }
