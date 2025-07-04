@@ -10,7 +10,7 @@
             class="select-date"
             :disabled="!isAuthenticated || isLoading"
           >
-            mobil
+            Dates
           </button>
 
           <input
@@ -33,7 +33,7 @@
               @click="onExportToExcel"
               :disabled="!isAuthenticated || items.length === 0 || isLoading"
             >
-              Export to Excel
+              Excel >>
             </button>
 
             <select
