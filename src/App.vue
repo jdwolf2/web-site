@@ -376,11 +376,7 @@ function onExportToExcel() {
   border-radius: 0;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(40, 40, 40);
-}
+
 @media (max-width: 1300px) {
   .top-line-wrapper {
     margin: 0;
@@ -483,8 +479,7 @@ body {
 }
 
 
-
-@media (max-width: 768px) and (orientation: portrait) {
+media (max-width: 768px) and (orientation: portrait) {
   .top-line {
     display: flex;
     flex-direction: column;
@@ -510,25 +505,35 @@ body {
     flex: 1 1 auto;
   }
 
-  .export-group {
+  .third-line-group {
     order: 3;
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
     gap: 8px;
     padding-left: 10px;
-    flex-wrap: wrap;
+  }
+
+  .export-group {
+    display: flex;
+    gap: 8px;
+    flex: 1 1 auto;
   }
 
   .sign-in,
   .sign-out {
-    order: 4;
-    width: 100%;
-    display: flex;
-    gap: 8px;
-    padding-left: 10px;
-    margin-top: 4px;
+    margin-left: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(40, 40, 40);
+}
 
 </style>
