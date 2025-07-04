@@ -2,6 +2,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
+import './styles.css'
+
 // import { Amplify } from '@aws-amplify/core'
 // import { Auth } from '@aws-amplify/auth'
 
