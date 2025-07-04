@@ -174,4 +174,27 @@ body {
   .top-line-wrapper {
     margin: 0;
   }
+
+  .logo {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+  .top-line {
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .date-display {
+    order: 1;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .select-date {
+    order: 2;
+    width: 100%;
+  }
 }
