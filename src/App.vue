@@ -436,8 +436,6 @@ body {
     width: auto;
   }
 }
-
-
 @media (max-width: 768px) and (orientation: portrait) {
   .top-line {
     display: flex;
@@ -483,5 +481,54 @@ body {
     margin-top: 4px;
   }
 }
+
+
+
+@media (max-width: 768px) and (orientation: portrait) {
+  .top-line {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .logo {
+    order: 1;
+    margin-left: 10px;
+  }
+
+  .date-group {
+    order: 2;
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    padding-left: 10px;
+  }
+
+  .select-date,
+  .date-display {
+    flex: 1 1 auto;
+  }
+
+  .export-group {
+    order: 3;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    padding-left: 10px;
+    flex-wrap: wrap;
+  }
+
+  .sign-in,
+  .sign-out {
+    order: 4;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    padding-left: 10px;
+    margin-top: 4px;
+  }
+}
+
 
 </style>
