@@ -27,8 +27,8 @@
             :allowFiltering="true"
             :filterSettings="filterSettings"
             :allowTextWrap="true"
-            :autoFit="min-content"
-            :width="'100%'"
+            :autoFit="false"
+            :width="'min-content'"
             :height="'510px'"
             :frozenRows="0"
 
