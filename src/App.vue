@@ -489,15 +489,15 @@ media (max-width: 768px) and (orientation: portrait) {
 
   .logo {
     order: 1;
-    margin-left: 10px;
+    margin-left: 0;
   }
 
   .date-group {
     order: 2;
     display: flex;
-    gap: 8px;
-    width: 100%;
-    padding-left: 10px;
+    gap: 4px;
+    width: min-content;
+    padding-left: 0;
   }
 
   .select-date,
@@ -507,18 +507,18 @@ media (max-width: 768px) and (orientation: portrait) {
 
   .third-line-group {
     order: 3;
-    width: 100%;
+    width: min-content;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
-    gap: 8px;
-    padding-left: 10px;
+    gap: 4px;
+    padding-left: 0;
   }
 
   .export-group {
     display: flex;
-    gap: 8px;
+    gap: 4px;
     flex: 1 1 auto;
   }
 
