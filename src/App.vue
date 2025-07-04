@@ -14,7 +14,7 @@
             class="select-date"
             :disabled="!isAuthenticated || isLoading"
           >
-            Dates
+            Select Dates
           </button>
 
           <input
