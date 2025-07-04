@@ -10,7 +10,7 @@
             class="select-date"
             :disabled="!isAuthenticated || isLoading"
           >
-            dsk top dogs are us
+            {{ isMobileWidth ? 'Dates' : 'Select Date Range' }}
           </button>
 
           <input
@@ -86,7 +86,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useAuth } from './useAuth.js'
 import { useDynamoDB } from './useDynamoDB.js'
 import DtRange from './DtRange.vue'
@@ -104,6 +104,21 @@ onMounted(() => {
   if (typeof checkAuth === 'function') checkAuth()
 })
 
+// 📱 Mobile Width Check
+const isMobileWidth = ref(window.innerWidth < 1000)
+
+function updateWidth() {
+  isMobileWidth.value = window.innerWidth < 1000
+}
+
+onMounted(() => {
+  window.addEventListener('resize', updateWidth)
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', updateWidth)
+})
+
+// 🔐 Auth actions
 function onSignInClick() {
   if (typeof signIn === 'function') signIn()
 }
@@ -118,18 +133,21 @@ function triggerDateRange() {
   }
   dtRangeRef.value?.openPicker()
 }
+
 function onStartDateUpdate(val) {
   if (val != null) startDate.value = val
 }
 function onStopDateUpdate(val) {
   if (val != null) stopDate.value = val
 }
+
 function formatUnix(unix) {
   if (unix == null) return '—'
   const d = new Date(unix * 1000)
   const m = d.toLocaleString('en-US', { month: 'short' })
   return `${m} ${d.getDate()} ${d.getFullYear()}`
 }
+
 const formattedStartDate = computed(() => formatUnix(startDate.value))
 const formattedStopDate = computed(() => formatUnix(stopDate.value))
 const dateRangeDisplay = computed(() =>
