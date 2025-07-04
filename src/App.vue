@@ -376,7 +376,6 @@ function onExportToExcel() {
   border-radius: 0;
 }
 
-
 @media (max-width: 1300px) {
   .top-line-wrapper {
     margin: 0;
@@ -478,7 +477,6 @@ function onExportToExcel() {
   }
 }
 
-
 media (max-width: 768px) and (orientation: portrait) {
   .top-line {
     display: flex;
@@ -507,7 +505,7 @@ media (max-width: 768px) and (orientation: portrait) {
 
   .third-line-group {
     order: 3;
-    width: min-content;
+    width: 50%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -519,7 +517,7 @@ media (max-width: 768px) and (orientation: portrait) {
   .export-group {
     display: flex;
     gap: 4px;
-    width:min-content;
+    width: 120px;
     flex: 1 1 auto;
   }
 
@@ -527,14 +525,12 @@ media (max-width: 768px) and (orientation: portrait) {
   .sign-out {
     margin-left: auto;
     flex-shrink: 0;
-    align:center;
+    align: center;
     white-space: nowrap;
   }
 }
-
-
 </style>
-<style> 
+<style>
 body {
   margin: 0;
   padding: 0;
