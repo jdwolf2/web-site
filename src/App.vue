@@ -10,7 +10,7 @@
             class="select-date"
             :disabled="!isAuthenticated || isLoading"
           >
-            dogs are us
+            dsk top dogs are us
           </button>
 
           <input
