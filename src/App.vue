@@ -458,24 +458,68 @@ function onExportToExcel() {
     flex: 1 1 auto;
   }
 
+  .export-group,
+  .sign-in,
+  .sign-out {
+    order: 3;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    padding-left: 10px;
+  }
+
+  .export-group {
+    flex-wrap: wrap;
+  }
+
+  .sign-in,
+  .sign-out {
+    margin-top: 4px;
+  }
+}
+
+
+media (max-width: 768px) and (orientation: portrait) {
+  .top-line {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .logo {
+    order: 1;
+    margin-left: 10px;
+  }
+
+  .date-group {
+    order: 2;
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    padding-left: 10px;
+  }
+
+  .select-date,
+  .date-display {
+    flex: 1 1 auto;
+  }
+
   .third-line-group {
     order: 3;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
     padding-left: 10px;
   }
 
   .export-group {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     gap: 8px;
-    flex-wrap: nowrap;
-    width: 100%;
-  }
-
-  .export-button,
-  .export-dropdown {
-    flex: 0 1 auto;
+    flex: 1 1 auto;
   }
 
   .sign-in,
@@ -485,6 +529,8 @@ function onExportToExcel() {
     white-space: nowrap;
   }
 }
+
+
 </style>
 <style> 
 body {
