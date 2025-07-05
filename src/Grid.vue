@@ -389,7 +389,7 @@ body {
   border: 7px solid yellow;
 }
 
-.e-columnheader{
+.e-columnheader {
   height: 50px !important;
 }
 .e-grid .e-headercell {
@@ -397,5 +397,12 @@ body {
   padding-bottom: 2px;
   line-height: 1.2;
   height: 34px !important;
+}
+
+.e-daterangepicker.e-popup {
+  position: fixed !important;
+  left: 18px !important;
+  top: 95px !important;
+  z-index: 10000 !important;
 }
 </style>
