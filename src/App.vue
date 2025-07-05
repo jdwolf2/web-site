@@ -389,18 +389,15 @@ function onExportToExcel() {
     margin-left: 0;
   }
 
-  /* .date-group {
+  .date-group {
     order: 2;
     display: flex;
     gap: 4px;
     width: 100%;
     padding-left: 0;
     margin-left: 0;
-  } */
+  }
   .select-date {
-    order: 2;
-    gap: 4px;
-    display: flex;
     flex: 0 0 auto;
     padding: 0 6px;
   }
@@ -415,12 +412,22 @@ function onExportToExcel() {
     align-items: center;
     gap: 4px;
     flex-wrap: nowrap;
+  }
+
+  .export-controls {
+    flex: 0 0 auto;
+  }
+
+  .export-button,
+  .export-dropdown {
     flex: 0 0 auto;
   }
 
   .sign-in,
   .sign-out {
-    flex: 1 1 auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+    margin-left: auto;
   }
 }
 </style>
@@ -428,6 +435,6 @@ function onExportToExcel() {
 body {
   margin: 0;
   padding: 0;
-  background-color: rgb(40, 40, 40);
+  background-color: rgb(20, 20, 20);
 }
 </style>
