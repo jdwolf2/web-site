@@ -55,16 +55,22 @@ onUnmounted(() => window.removeEventListener('resize', updateWidth))
 
 function onOpen(args) {
   if (!isMobileWidth.value) {
-    args.popup.element.style.position = 'fixed'
-    args.popup.element.style.left = '18px'
-    args.popup.element.style.top = '95px'
-    args.popup.element.style.zIndex = '10000'
+    const popup = args.popup
+    popup.position = { X: 'left', Y: 'top' }
+    popup.element.style.position = 'fixed'
+    popup.element.style.left = '18px'
+    popup.element.style.top = '95px'
+    popup.element.style.zIndex = '10000'
   }
 }
 </script>
 
-<style scoped>
+<style>
 .e-daterangepicker.e-popup {
+  position: fixed !important;
+  left: 18px !important;
+  top: 95px !important;
+  z-index: 10000 !important;
   max-width: 300px;
 }
 </style>
