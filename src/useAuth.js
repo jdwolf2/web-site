@@ -13,8 +13,8 @@ Amplify.configure({
     oauth: {
       domain: 'us-east-2g2vpbtsqp.auth.us-east-2.amazoncognito.com',
       scope: ['openid', 'email', 'profile'],
-      redirectSignIn: 'https://accusalt-desktop.netlify.app/',
-      redirectSignOut:'https://accusalt-desktop.netlify.app/',
+      redirectSignIn: 'https://accusaltsitedata.com/',
+      redirectSignOut: 'https://accusaltsitedata.com/',
       responseType: 'code',
     },
   },
@@ -73,7 +73,7 @@ export function useAuth() {
 
     const domain = 'https://us-east-2g2vpbtsqp.auth.us-east-2.amazoncognito.com'
     const clientId = '2ps5f1adntoj56ml8ll8c7lbrg'
-    const redirectUri = encodeURIComponent('https://accusalt-desktop.netlify.app/')
+    const redirectUri = encodeURIComponent('https://accusaltsitedata.com/')
     const responseType = 'code'
     const scope = encodeURIComponent('openid email profile')
     const loginUrl =
