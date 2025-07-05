@@ -390,6 +390,9 @@ function onExportToExcel() {
   .logo {
     margin: 0;
   }
+  .logo {
+    vertical-align: top;
+  }
 
   .top-line {
     display: flex;
