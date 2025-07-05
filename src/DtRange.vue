@@ -23,7 +23,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { DateRangePickerComponent as EjsDaterangepicker } from '@syncfusion/ej2-vue-calendars'
 
-// Props
+// Props from parent
 const props = defineProps({
   startUnix: Number,
   stopUnix: Number,
@@ -37,7 +37,7 @@ const drp = ref(null)
 const isMobile = ref(false)
 const waterMark = 'Select Date Range'
 
-// Responsive check
+// Detect screen width for mobile layout
 function updateMobileFlag() {
   isMobile.value = window.innerWidth <= 768
 }
@@ -49,7 +49,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateMobileFlag)
 })
 
-// Computed: date range value passed to the picker
+// Computed date range for the calendar input
 const computedValue = computed(() => ({
   startDate: props.startUnix ? new Date(props.startUnix * 1000) : null,
   endDate: props.stopUnix ? new Date(props.stopUnix * 1000) : null,
@@ -61,7 +61,7 @@ function openPicker() {
 }
 defineExpose({ openPicker })
 
-// Emit updated values when user selects date range
+// Emit new date values back to parent
 function handleChange(args) {
   const startUnix = args.startDate ? Math.floor(args.startDate.getTime() / 1000) : null
   const endUnix = args.endDate ? Math.floor(args.endDate.getTime() / 1000) : null
@@ -70,19 +70,21 @@ function handleChange(args) {
   emit('update:stop', endUnix)
 }
 
-// Popup open handler for positioning
+// Popup positioning
 function onOpen(args) {
   if (isMobile.value) {
-    // Mobile: stacked calendar, Syncfusion handles layout
+    // Let Syncfusion apply stacked layout on mobile
     return
   }
 
-  // Desktop: exact pixel positioning relative to page
-  args.popup.relateTo = document.body
-  args.popup.targetType = 'container'
-  args.popup.position = { X: 'left', Y: 'top' }
-  args.popup.offsetX = 232  // left: 232px
-  args.popup.offsetY = 95   // top: 95px
-  args.popup.zIndex = 10000
+  // Desktop: apply fixed pixel position after DOM is ready
+  requestAnimationFrame(() => {
+    args.popup.relateTo = document.body
+    args.popup.targetType = 'container'
+    args.popup.position = { X: 'left', Y: 'top' }
+    args.popup.offsetX = 232
+    args.popup.offsetY = 95
+    args.popup.zIndex = 10000
+  })
 }
 </script>
