@@ -387,7 +387,7 @@ function onExportToExcel() {
   z-index: 10000 !important;
 }
 
- .e-date-range-container {
+ .e-daterangepicker .e-popup .e-control .e-lib .e-popup-open .e-keyboard{
   position: fixed !important;
   left: 18px !important;
   top: 95px !important;
