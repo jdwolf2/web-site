@@ -13,7 +13,7 @@
               class="select-date"
               :disabled="!isAuthenticated || isLoading"
             >
-              {{ isMobileWidth ? 'Dates' : 'Select Date Range' }}
+              {{ isMobileWidth ? 'Select Dates' : 'Select Date Range' }}
             </button>
 
             <input
@@ -419,8 +419,9 @@ function onExportToExcel() {
   .sign-in,
   .sign-out {
     order: 4;
+    display: inline-block;
     flex: 0 0 auto;
-    margin-left:auto;
+    margin-left: auto;
   }
 }
 </style>
