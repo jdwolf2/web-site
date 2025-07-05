@@ -392,4 +392,10 @@ body {
 .e-columnheader{
   height: 50px !important;
 }
+.e-grid .e-headercell {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  line-height: 1.2;
+  height: 34px !important;
+}
 </style>
