@@ -387,6 +387,13 @@ function onExportToExcel() {
   z-index: 10000 !important;
 }
 
+ .e-date-range-container {
+  position: fixed !important;
+  left: 18px !important;
+  top: 95px !important;
+  z-index: 10000 !important;
+}
+
 * {
   border-radius: 0;
 }
