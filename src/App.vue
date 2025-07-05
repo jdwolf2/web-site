@@ -256,6 +256,7 @@ function onExportToExcel() {
   border: none;
   cursor: pointer;
   padding: 0 10px;
+  margin-right: 4px;
 }
 .select-date:disabled {
   background: #ccc;
@@ -414,7 +415,7 @@ function onExportToExcel() {
   }
   .export-button,
   .export-dropdown {
-    display:flex
+    display: flex;
     flex: 0 0 auto;
     min-width: 0;
   }
