@@ -376,113 +376,12 @@ function onExportToExcel() {
   border-radius: 0;
 }
 
-@media (max-width: 1300px) {
-  .top-line-wrapper {
-    margin: 0;
-  }
-
-  .logo {
-    margin-left: 0px;
-  }
-}
-
-@media (max-width: 768px) and (orientation: portrait) {
-  .top-line {
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
-  .date-display {
-    order: 1;
-    width: 100%;
-    margin-bottom: 4px;
-  }
-
-  .select-date {
-    order: 2;
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) and (orientation: portrait) {
-  .top-line {
-    flex-wrap: wrap;
-    align-items: flex-start;
-  }
-
-  /* Group the Dates button and input on same row */
-  .select-date {
-    order: 1;
-    flex: 0 0 auto;
-    margin-right: 8px;
-  }
-
-  .date-display {
-    order: 2;
-    flex: 1 1 auto;
-    min-width: 160px;
-  }
-
-  /* Keep them on the same row */
-  .select-date,
-  .date-display {
-    display: inline-block;
-    width: auto;
-  }
-}
 @media (max-width: 768px) and (orientation: portrait) {
   .top-line {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
-  }
-
-  .logo {
-    order: 1;
-    margin-left: 10px;
-  }
-
-  .date-group {
-    order: 2;
-    display: flex;
-    gap: 8px;
-    width: 100%;
-    padding-left: 10px;
-  }
-
-  .select-date,
-  .date-display {
-    flex: 1 1 auto;
-  }
-
-  .export-group,
-  .sign-in,
-  .sign-out {
-    order: 3;
-    width: 100%;
-    display: flex;
-    gap: 8px;
-    padding-left: 10px;
-  }
-
-  .export-group {
-    flex-wrap: wrap;
-  }
-
-  .sign-in,
-  .sign-out {
-    margin-top: 4px;
-  }
-}
-
-@media (max-width: 768px) and (orientation: portrait) {
-  .top-line {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    gap: 6px;
   }
 
   .logo {
@@ -490,52 +389,40 @@ function onExportToExcel() {
     margin-left: 0;
   }
 
-  .date-group {
+  /* .date-group {
     order: 2;
     display: flex;
     gap: 4px;
     width: 100%;
     padding-left: 0;
+    margin-left: 0;
+  } */
+  .select-date {
+    order: 2;
+    gap: 4px;
+    display: flex;
+    flex: 0 0 auto;
+    padding: 0 6px;
   }
-.select-date {
-  flex: 0 0 auto;
-  padding: 0 4px;
-}
 
-.date-display {
-  flex: 1 1 auto;
-  min-width: 0;
-}
+  .date-display {
+    flex: 1 1 auto;
+  }
 
-.export-group {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: nowrap;
-  width: 100%;
-}
+  .export-group {
+    order: 3;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: nowrap;
+    flex: 0 0 auto;
+  }
 
-.export-controls {
-  display: flex;
-  gap: 8px;
-  flex-shrink: 1;
+  .sign-in,
+  .sign-out {
+    flex: 1 1 auto;
+  }
 }
-
-.export-button,
-.export-dropdown {
-  flex: 0 0 auto;
-}
-
-.sign-in,
-.sign-out {
-  flex-shrink: 0;
-  white-space: nowrap;
-  margin-left: auto;
-}
-
-}
-
 </style>
 <style>
 body {
