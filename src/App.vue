@@ -379,6 +379,11 @@ function onExportToExcel() {
 }
 
 @media (max-width: 768px) and (orientation: portrait) {
+
+  .logo{
+    margin: 0;
+  }
+  
   .top-line {
     display: flex;
     flex-direction: column;
@@ -417,13 +422,6 @@ function onExportToExcel() {
     gap: 8px;
   }
 
-  .export-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: nowrap;
-    flex: 0 0 auto;
-  }
 
   .export-button,
   .export-dropdown {
@@ -434,7 +432,6 @@ function onExportToExcel() {
   .sign-out {
     flex: 0 0 auto;
     margin-left: auto;
-    white-space: nowrap;
   }
 }
 </style>
