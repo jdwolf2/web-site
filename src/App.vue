@@ -385,7 +385,7 @@ function onExportToExcel() {
 
   .logo {
     order: 1;
-    margin-left: 0;
+    margin: 0;
   }
 
   .date-group {
@@ -411,6 +411,7 @@ function onExportToExcel() {
     align-items: center;
     gap: 4px;
     flex-wrap: nowrap;
+    min-width: 0;
   }
   .export-button,
   .export-dropdown {
