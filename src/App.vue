@@ -477,7 +477,7 @@ function onExportToExcel() {
   }
 }
 
-media (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 768px) and (orientation: portrait) {
   .top-line {
     display: flex;
     flex-direction: column;
@@ -494,41 +494,48 @@ media (max-width: 768px) and (orientation: portrait) {
     order: 2;
     display: flex;
     gap: 4px;
-    width: min-content;
+    width: 100%;
     padding-left: 0;
   }
-
-  .select-date,
-  .date-display {
-    flex: 1 1 auto;
-  }
-
-  .third-line-group {
-    order: 3;
-    width: 50%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: 4px;
-    padding-left: 0;
-  }
-
-  .export-group {
-    display: flex;
-    gap: 4px;
-    width: 120px;
-    flex: 1 1 auto;
-  }
-
-  .sign-in,
-  .sign-out {
-    margin-left: auto;
-    flex-shrink: 0;
-    align: center;
-    white-space: nowrap;
-  }
+.select-date {
+  flex: 0 0 auto;
+  padding: 0 4px;
 }
+
+.date-display {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.export-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.export-controls {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 1;
+}
+
+.export-button,
+.export-dropdown {
+  flex: 0 0 auto;
+}
+
+.sign-in,
+.sign-out {
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+}
+
 </style>
 <style>
 body {
