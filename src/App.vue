@@ -3,11 +3,9 @@
     <div class="app-container">
       <div class="top-line-wrapper">
         <div class="top-line">
-          <!-- Line 1: Logo -->
           <img src="./assets/tableLogo.jpg" alt="AccuSalt Logo" class="logo" />
 
-          <!-- Line 2: Dates + Input -->
-          <div class="date-group" id="date-group-anchor">
+          <div class="date-group">
             <button
               @click="triggerDateRange"
               class="select-date"
@@ -26,7 +24,6 @@
             />
           </div>
 
-          <!-- Line 3: Export group + Auth buttons (same line) -->
           <div class="row-group">
             <div
               class="export-group"
@@ -53,30 +50,17 @@
               </select>
             </div>
 
-            <button
-              class="sign-in"
-              v-if="!isAuthenticated"
-              @click="onSignInClick"
-            >
-              Sign in
-            </button>
-            <button
-              class="sign-out"
-              v-if="isAuthenticated"
-              @click="onSignOutClick"
-            >
-              Sign out
-            </button>
+            <button class="sign-in" v-if="!isAuthenticated" @click="onSignInClick">Sign in</button>
+            <button class="sign-out" v-if="isAuthenticated" @click="onSignOutClick">Sign out</button>
           </div>
 
-          <!-- Hidden calendar control -->
+          <!-- Hidden popup calendar -->
           <DtRange
             ref="dtRangeRef"
             :startUnix="startDate"
             :stopUnix="stopDate"
             @update:start="onStartDateUpdate"
             @update:stop="onStopDateUpdate"
-            :popup-open="onDatePopupOpen"
           />
         </div>
       </div>
@@ -208,187 +192,12 @@ function onExportToExcel() {
 
   grid.excelExport(exportProps)
 }
-
-// Custom popup positioning via Syncfusion API
-function onDatePopupOpen(args) {
-  args.popup.relateTo = '#date-group-anchor'
-  args.popup.position = { X: 'left', Y: 'bottom' }
-  args.popup.collision = { X: 'flip', Y: 'flip' }
-  args.popup.offsetX = 0
-  args.popup.offsetY = 5
-}
 </script>
 
 <style scoped>
-
-@import '~@syncfusion/ej2-base/styles/material.css';
-@import '~@syncfusion/ej2-buttons/styles/material.css';
-@import '~@syncfusion/ej2-calendars/styles/material.css';
-@import '~@syncfusion/ej2-dropdowns/styles/material.css';
-@import '~@syncfusion/ej2-inputs/styles/material.css';
-@import '~@syncfusion/ej2-navigations/styles/material.css';
-@import '~@syncfusion/ej2-popups/styles/material.css';
-@import '~@syncfusion/ej2-splitbuttons/styles/material.css';
-@import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
-
-
-/* (same CSS from your previous version; remove .e-daterangepicker.e-popup override) */
-.outer-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-}
-.app-container {
-  width: 100%;
-  max-width: 1500px;
-  font-family: Arial, sans-serif;
-}
-.logo {
-  width: auto;
-  height: 35px;
-  margin-left: 10px;
-  margin-right: 0;
-}
-.top-line-wrapper {
-  margin: 20px 0 0 0;
-}
-.top-line {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  flex-wrap: wrap;
-}
-.select-date,
-.sign-in,
-.sign-out,
-.export-button,
-.export-dropdown {
-  height: 25px;
-  font-size: 14px;
-  border-radius: 0;
-  margin: 0;
-  padding: 0 6px;
-}
-.select-date {
-  background: lightblue;
-  color: black;
-  border: none;
-  cursor: pointer;
-  padding: 0 10px;
-  margin-right: 4px;
-}
-.select-date:disabled {
-  background: #ccc;
-  color: #666;
-  cursor: not-allowed;
-}
-.select-date:hover:enabled {
-  background: #125da4;
-  color: white;
-}
-.export-group {
-  display: flex;
-  align-items: center;
-  border: 2px solid white;
-  padding: 2px 5px;
-  gap: 5px;
-}
-.export-group.disabled {
-  opacity: 0.6;
-  pointer-events: none;
-}
-.export-button {
-  background: lightblue;
-  color: black;
-  border: none;
-  cursor: pointer;
-  padding: 0 10px;
-}
-.export-button:hover:enabled {
-  background: #125da4;
-  color: white;
-}
-.export-button:disabled {
-  background-color: gray;
-  color: white;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-.export-dropdown {
-  padding: 0 10px;
-  border: none;
-}
-.export-dropdown:disabled {
-  background-color: #ccc;
-  color: #666;
-  opacity: 0.6;
-}
-.sign-in {
-  background: lightgreen;
-  color: black;
-  border: none;
-  cursor: pointer;
-  padding: 0 10px;
-}
-.sign-in:hover {
-  background: green;
-  color: white;
-}
-.sign-out {
-  background: lightyellow;
-  color: black;
-  border: none;
-  cursor: pointer;
-  padding: 0 10px;
-}
-.sign-out:hover {
-  background: yellow;
-  color: black;
-}
-.date-display {
-  height: 25px;
-  font-size: 16px;
-  border: 1px solid #bdbdbd;
-  background: #f5f5f5;
-  padding: 0 12px;
-  min-width: 210px;
-}
-.grid-wrapper {
-  margin: 4px 10px 0 10px;
-  text-align: left;
-  min-height: 520px;
-}
-.status-msg {
-  margin: 0.5em 10px;
-  font-size: 1rem;
-  color: #333;
-  background: #f1f1f1;
-  border-left: 4px solid #2196f3;
-  padding: 8px 12px;
-}
-.loading-msg {
-  font-size: 1.1rem;
-  margin: 20px;
-  color: #333;
-}
-* {
-  border-radius: 0;
-}
-.row-group {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-@media (max-width: 1200px) {
-  .top-line-wrapper {
-    margin: 0;
-  }
-}
-@media (max-width: 780px) and (orientation: portrait) {
+@media (max-width: 768px) and (orientation: portrait) {
   .logo {
     margin: 0;
-    vertical-align: top;
   }
   .top-line {
     display: flex;
@@ -432,13 +241,5 @@ function onDatePopupOpen(args) {
     flex: 0 0 auto;
     margin-left: auto;
   }
-}
-</style>
-
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(20, 20, 20);
 }
 </style>
