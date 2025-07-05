@@ -105,7 +105,7 @@ const onHeaderCellInfo = (args) => {
   headerCell.style.padding = '0 5px'
   headerCell.style.borderRight = '1px solid white'
   headerCell.style.color = 'white'
-  headerCell.style.height = '40px'
+  headerCell.style.height = '50px'
   switch (columnField) {
     case 'siteName':
     case 'Truck':
@@ -387,5 +387,9 @@ body {
   color: black;
   background-color: yellow;
   border: 7px solid yellow;
+}
+
+.e-columnheader{
+  height: 50px !important;
 }
 </style>
