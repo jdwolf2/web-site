@@ -104,6 +104,7 @@ const onHeaderCellInfo = (args) => {
   const columnField = args.cell.column.field
   headerCell.style.padding = '0 5px'
   headerCell.style.borderRight = '1px solid white'
+  headerCell.style.color = 'white'
 
   switch (columnField) {
     case 'siteName':
