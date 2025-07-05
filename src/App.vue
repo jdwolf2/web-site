@@ -399,7 +399,7 @@ function onExportToExcel() {
   }
   .select-date {
     flex: 0 0 auto;
-    padding: 0 6px;
+    padding: 0 10px;
   }
 
   .date-display {
@@ -413,21 +413,13 @@ function onExportToExcel() {
     gap: 4px;
     flex-wrap: nowrap;
   }
-
-  .export-controls {
-    flex: 0 0 auto;
-  }
-
   .export-button,
   .export-dropdown {
     flex: 0 0 auto;
   }
-
   .sign-in,
   .sign-out {
-    flex-shrink: 0;
-    white-space: nowrap;
-    margin-left: auto;
+    flex: 0 0 auto;
   }
 }
 </style>
