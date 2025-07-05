@@ -25,42 +25,40 @@
               :disabled="!isAuthenticated"
             />
           </div>
-          <div class="export-sign-controls">
-            <!-- Line 3: Export group -->
-            <div
-              class="export-group"
-              :class="{
-                disabled: !isAuthenticated || items.length === 0 || isLoading,
-              }"
-            >
-              <button
-                class="export-button"
-                @click="onExportToExcel"
-                :disabled="!isAuthenticated || items.length === 0 || isLoading"
-              >
-                Export to Excel
-              </button>
-
-              <select
-                v-model="exportOption"
-                class="export-dropdown"
-                :disabled="!isAuthenticated || items.length === 0 || isLoading"
-              >
-                <option value="all">All Records</option>
-                <option value="currentPage">Current Page</option>
-                <option value="filtered">Filtered Records</option>
-              </select>
-            </div>
-
-            <!-- Line 3: Auth buttons -->
+          <!-- Line 3: Export group -->
+          <div
+            class="export-group"
+            :class="{
+              disabled: !isAuthenticated || items.length === 0 || isLoading,
+            }"
+          >
             <button
-              class="sign-in"
-              v-if="!isAuthenticated"
-              @click="onSignInClick"
+              class="export-button"
+              @click="onExportToExcel"
+              :disabled="!isAuthenticated || items.length === 0 || isLoading"
             >
-              Sign in
+              Export to Excel
             </button>
+
+            <select
+              v-model="exportOption"
+              class="export-dropdown"
+              :disabled="!isAuthenticated || items.length === 0 || isLoading"
+            >
+              <option value="all">All Records</option>
+              <option value="currentPage">Current Page</option>
+              <option value="filtered">Filtered Records</option>
+            </select>
           </div>
+
+          <!-- Line 3: Auth buttons -->
+          <button
+            class="sign-in"
+            v-if="!isAuthenticated"
+            @click="onSignInClick"
+          >
+            Sign in
+          </button>
           <button
             class="sign-out"
             v-if="isAuthenticated"
@@ -407,7 +405,7 @@ function onExportToExcel() {
     flex: 1 1 auto;
   }
 
-  .export-sign-controls {
+  .export-group {
     order: 3;
     display: flex;
     align-items: center;
@@ -420,7 +418,9 @@ function onExportToExcel() {
   }
   .sign-in,
   .sign-out {
+    order: 4;
     flex: 0 0 auto;
+    margin-left:auto;
   }
 }
 </style>
