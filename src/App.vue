@@ -13,7 +13,7 @@
               class="select-date"
               :disabled="!isAuthenticated || isLoading"
             >
-              {{ isMobileWidth ? 'Select Dates' : 'Select Date Range' }}
+              {{ isMobileWidth ? 'Dates' : 'Select Date Range' }}
             </button>
 
             <input
@@ -25,47 +25,49 @@
               :disabled="!isAuthenticated"
             />
           </div>
-          <!-- Line 3: Export group -->
-          <div
-            class="export-group"
-            :class="{
-              disabled: !isAuthenticated || items.length === 0 || isLoading,
-            }"
-          >
+
+          <!-- Line 3: Export group + Auth buttons (same line) -->
+          <div class="row-group">
+            <div
+              class="export-group"
+              :class="{
+                disabled: !isAuthenticated || items.length === 0 || isLoading,
+              }"
+            >
+              <button
+                class="export-button"
+                @click="onExportToExcel"
+                :disabled="!isAuthenticated || items.length === 0 || isLoading"
+              >
+                Export to Excel
+              </button>
+
+              <select
+                v-model="exportOption"
+                class="export-dropdown"
+                :disabled="!isAuthenticated || items.length === 0 || isLoading"
+              >
+                <option value="all">All Records</option>
+                <option value="currentPage">Current Page</option>
+                <option value="filtered">Filtered Records</option>
+              </select>
+            </div>
+
             <button
-              class="export-button"
-              @click="onExportToExcel"
-              :disabled="!isAuthenticated || items.length === 0 || isLoading"
+              class="sign-in"
+              v-if="!isAuthenticated"
+              @click="onSignInClick"
             >
-              Export to Excel
+              Sign in
             </button>
-
-            <select
-              v-model="exportOption"
-              class="export-dropdown"
-              :disabled="!isAuthenticated || items.length === 0 || isLoading"
+            <button
+              class="sign-out"
+              v-if="isAuthenticated"
+              @click="onSignOutClick"
             >
-              <option value="all">All Records</option>
-              <option value="currentPage">Current Page</option>
-              <option value="filtered">Filtered Records</option>
-            </select>
+              Sign out
+            </button>
           </div>
-
-          <!-- Line 3: Auth buttons -->
-          <button
-            class="sign-in"
-            v-if="!isAuthenticated"
-            @click="onSignInClick"
-          >
-            Sign in
-          </button>
-          <button
-            class="sign-out"
-            v-if="isAuthenticated"
-            @click="onSignOutClick"
-          >
-            Sign out
-          </button>
 
           <!-- Hidden calendar control -->
           <DtRange
@@ -381,12 +383,12 @@ function onExportToExcel() {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
+    gap: 8px;
   }
 
   .logo {
     order: 1;
-    margin-top: -10px;
+    margin-left: 0;
   }
 
   .date-group {
@@ -395,35 +397,44 @@ function onExportToExcel() {
     gap: 4px;
     width: 100%;
     padding-left: 0;
-    margin-left: 0;
   }
+
   .select-date {
     flex: 0 0 auto;
-    padding: 0 10px;
+    padding: 0 4px;
   }
 
   .date-display {
     flex: 1 1 auto;
+    min-width: 0;
   }
 
-  .export-group {
+  .row-group {
     order: 3;
     display: flex;
     align-items: center;
-    gap: 4px;
-    flex-wrap: nowrap;
+    width: 100%;
+    gap: 8px;
   }
+
+  .export-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    flex: 0 0 auto;
+  }
+
   .export-button,
   .export-dropdown {
-    display: flex;
     flex: 0 0 auto;
-    min-width: 0;
   }
+
   .sign-in,
   .sign-out {
-    order: 4;
     flex: 0 0 auto;
     margin-left: auto;
+    white-space: nowrap;
   }
 }
 </style>
