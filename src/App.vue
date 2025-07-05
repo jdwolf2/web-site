@@ -210,7 +210,7 @@ function onExportToExcel() {
 }
 </script>
 
-<style scoped>
+<style>
 .outer-wrapper {
   display: flex;
   justify-content: center;
