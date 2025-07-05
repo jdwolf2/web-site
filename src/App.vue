@@ -411,11 +411,11 @@ function onExportToExcel() {
     align-items: center;
     gap: 4px;
     flex-wrap: nowrap;
-    min-width: 0;
   }
   .export-button,
   .export-dropdown {
     flex: 0 0 auto;
+    min-width: 0;
   }
   .sign-in,
   .sign-out {
