@@ -251,6 +251,7 @@ function onExportToExcel() {
   font-size: 14px;
   border-radius: 0;
   margin: 0;
+  padding: 0 6px;
 }
 
 .select-date {
@@ -379,6 +380,12 @@ function onExportToExcel() {
   border-radius: 0;
 }
 
+.row-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
 @media (max-width: 1000px) and (orientation: portrait) {
   .logo {
     margin: 0;
@@ -389,11 +396,12 @@ function onExportToExcel() {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+    margin: 0;
   }
 
   .logo {
     order: 1;
-    margin-left: 0;
+    flex: 0 0 auto;
   }
 
   .date-group {
