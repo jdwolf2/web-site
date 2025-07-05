@@ -7,13 +7,12 @@
           <img src="./assets/tableLogo.jpg" alt="AccuSalt Logo" class="logo" />
 
           <!-- Line 2: Dates + Input -->
-          <div class="date-group">
+          <div class="date-group" id="date-group-anchor">
             <button
               @click="triggerDateRange"
               class="select-date"
               :disabled="!isAuthenticated || isLoading"
             >
-              <!-- {{ isMobileWidth ? 'Dates' : 'Select Date Range' }} -->
               Select Dates
             </button>
 
@@ -77,6 +76,7 @@
             :stopUnix="stopDate"
             @update:start="onStartDateUpdate"
             @update:stop="onStopDateUpdate"
+            :popup-open="onDatePopupOpen"
           />
         </div>
       </div>
@@ -208,6 +208,15 @@ function onExportToExcel() {
 
   grid.excelExport(exportProps)
 }
+
+// Custom popup positioning via Syncfusion API
+function onDatePopupOpen(args) {
+  args.popup.relateTo = '#date-group-anchor'
+  args.popup.position = { X: 'left', Y: 'bottom' }
+  args.popup.collision = { X: 'flip', Y: 'flip' }
+  args.popup.offsetX = 0
+  args.popup.offsetY = 5
+}
 </script>
 
 <style scoped>
@@ -222,37 +231,34 @@ function onExportToExcel() {
 @import '~@syncfusion/ej2-splitbuttons/styles/material.css';
 @import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
 
+
+/* (same CSS from your previous version; remove .e-daterangepicker.e-popup override) */
 .outer-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
 }
-
 .app-container {
   width: 100%;
   max-width: 1500px;
   font-family: Arial, sans-serif;
 }
-
 .logo {
   width: auto;
   height: 35px;
   margin-left: 10px;
   margin-right: 0;
 }
-
 .top-line-wrapper {
   margin: 20px 0 0 0;
 }
-
 .top-line {
   display: flex;
   align-items: center;
   gap: 0.5em;
   flex-wrap: wrap;
 }
-
 .select-date,
 .sign-in,
 .sign-out,
@@ -264,7 +270,6 @@ function onExportToExcel() {
   margin: 0;
   padding: 0 6px;
 }
-
 .select-date {
   background: lightblue;
   color: black;
@@ -282,7 +287,6 @@ function onExportToExcel() {
   background: #125da4;
   color: white;
 }
-
 .export-group {
   display: flex;
   align-items: center;
@@ -294,28 +298,23 @@ function onExportToExcel() {
   opacity: 0.6;
   pointer-events: none;
 }
-
 .export-button {
   background: lightblue;
   color: black;
   border: none;
   cursor: pointer;
   padding: 0 10px;
-  border-radius: 0;
 }
 .export-button:hover:enabled {
   background: #125da4;
   color: white;
-  border-radius: 0;
 }
 .export-button:disabled {
   background-color: gray;
   color: white;
   cursor: not-allowed;
-  border-radius: 0;
   opacity: 0.6;
 }
-
 .export-dropdown {
   padding: 0 10px;
   border: none;
@@ -325,7 +324,6 @@ function onExportToExcel() {
   color: #666;
   opacity: 0.6;
 }
-
 .sign-in {
   background: lightgreen;
   color: black;
@@ -337,7 +335,6 @@ function onExportToExcel() {
   background: green;
   color: white;
 }
-
 .sign-out {
   background: lightyellow;
   color: black;
@@ -349,7 +346,6 @@ function onExportToExcel() {
   background: yellow;
   color: black;
 }
-
 .date-display {
   height: 25px;
   font-size: 16px;
@@ -358,13 +354,11 @@ function onExportToExcel() {
   padding: 0 12px;
   min-width: 210px;
 }
-
 .grid-wrapper {
   margin: 4px 10px 0 10px;
   text-align: left;
   min-height: 520px;
 }
-
 .status-msg {
   margin: 0.5em 10px;
   font-size: 1rem;
@@ -373,51 +367,29 @@ function onExportToExcel() {
   border-left: 4px solid #2196f3;
   padding: 8px 12px;
 }
-
 .loading-msg {
   font-size: 1.1rem;
   margin: 20px;
   color: #333;
 }
-
-.e-daterangepicker.e-popup {
-  position: fixed !important;
-  left: 18px !important;
-  top: 95px !important;
-  z-index: 10000 !important;
-}
-
- .e-daterangepicker .e-popup .e-control .e-lib .e-popup-open .e-keyboard{
-  position: fixed !important;
-  left: 18px !important;
-  top: 95px !important;
-  z-index: 10000 !important;
-}
-
 * {
   border-radius: 0;
 }
-
 .row-group {
   display: flex;
   gap: 6px;
   align-items: center;
 }
-
 @media (max-width: 1200px) {
   .top-line-wrapper {
     margin: 0;
   }
 }
-
 @media (max-width: 780px) and (orientation: portrait) {
   .logo {
     margin: 0;
-  }
-  .logo {
     vertical-align: top;
   }
-
   .top-line {
     display: flex;
     flex-direction: column;
@@ -425,12 +397,10 @@ function onExportToExcel() {
     gap: 8px;
     margin: 0;
   }
-
   .logo {
     order: 1;
     flex: 0 0 auto;
   }
-
   .date-group {
     order: 2;
     display: flex;
@@ -438,17 +408,14 @@ function onExportToExcel() {
     width: 100%;
     padding-left: 0;
   }
-
   .select-date {
     flex: 0 0 auto;
     padding: 0 4px;
   }
-
   .date-display {
     flex: 1 1 auto;
     min-width: 0;
   }
-
   .row-group {
     order: 3;
     display: flex;
@@ -456,12 +423,10 @@ function onExportToExcel() {
     width: 100%;
     gap: 8px;
   }
-
   .export-button,
   .export-dropdown {
     flex: 0 0 auto;
   }
-
   .sign-in,
   .sign-out {
     flex: 0 0 auto;
@@ -469,6 +434,7 @@ function onExportToExcel() {
   }
 }
 </style>
+
 <style>
 body {
   margin: 0;
