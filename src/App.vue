@@ -13,7 +13,8 @@
               class="select-date"
               :disabled="!isAuthenticated || isLoading"
             >
-              {{ isMobileWidth ? 'Dates' : 'Select Date Range' }}
+              <!-- {{ isMobileWidth ? 'Dates' : 'Select Date Range' }} -->
+              Select Dates
             </button>
 
             <input
@@ -378,12 +379,11 @@ function onExportToExcel() {
   border-radius: 0;
 }
 
-@media (max-width: 768px) and (orientation: portrait) {
-
-  .logo{
+@media (max-width: 1000px) and (orientation: portrait) {
+  .logo {
     margin: 0;
   }
-  
+
   .top-line {
     display: flex;
     flex-direction: column;
@@ -421,7 +421,6 @@ function onExportToExcel() {
     width: 100%;
     gap: 8px;
   }
-
 
   .export-button,
   .export-dropdown {
