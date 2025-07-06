@@ -386,10 +386,6 @@ function onExportToExcel() {
   align-items: center;
 }
 
-@media (max-width: 1200px) {
-  .top-line;
-}
-
 @media (max-width: 780px) and (orientation: portrait) {
   .logo {
     margin: 0;
