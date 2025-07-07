@@ -191,7 +191,7 @@ function onExportToExcel() {
 }
 </script>
 
-<style >
+<style>
 .outer-wrapper {
   display: flex;
   justify-content: center;
@@ -351,7 +351,259 @@ function onExportToExcel() {
   z-index: 10000 !important;
 }
 
+@import '~@syncfusion/ej2-base/styles/material.css';
+@import '~@syncfusion/ej2-buttons/styles/material.css';
+@import '~@syncfusion/ej2-calendars/styles/material.css';
+@import '~@syncfusion/ej2-dropdowns/styles/material.css';
+@import '~@syncfusion/ej2-inputs/styles/material.css';
+@import '~@syncfusion/ej2-navigations/styles/material.css';
+@import '~@syncfusion/ej2-popups/styles/material.css';
+@import '~@syncfusion/ej2-splitbuttons/styles/material.css';
+@import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
 
+body {
+  background-color: rgb(40, 40, 40);
+}
 
-  
+.export-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 10px 10px;
+}
+
+/* .export-button {
+  padding: 0px 10px;
+  font-size: 14px;
+  height: 25px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+} */
+
+.export-button {
+  font-size: 14px;
+  height: 25px;
+  padding: 0 10px;
+  border-radius: 5px;
+  background: lightblue;
+  color: black;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 0;
+  padding-right: 32px;
+  white-space: nowrap;
+  width: auto;
+  min-width: 0;
+}
+.export-button:hover:enabled {
+  background: #125da4;
+  color: #fff;
+}
+
+.export-dropdown {
+  padding: 0px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  height: 25px;
+  margin-left: 0px;
+  border: none;
+  /* border: 1px solid #ccc; */
+}
+
+.e-grid td.e-selectionbackground {
+  background-color: #00b7ea;
+}
+
+.page-container {
+  display: block;
+  width: 100%;
+  margin: 0;
+  overflow: auto;
+}
+
+.e-grid {
+  overflow: auto;
+}
+
+.egrid .e-gridcontent {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.e-grid .e-gridheader {
+  overflow: auto;
+}
+
+.block-container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  margin-top: 2%;
+  height: max-content;
+}
+
+@media (max-width: 800px) {
+  .e-gridheader,
+  .e-gridcontent {
+    overflow: auto;
+  }
+}
+
+.custom-filter-popup {
+  max-height: 800px;
+  z-index: 2147483647;
+  width: 255px;
+  top: -69.2533px;
+  display: block;
+  visibility: visible;
+  position: absolute;
+  left: 0px;
+}
+
+.e-gridheader {
+  padding-right: 0 !important;
+}
+
+.total-container {
+  display: flex;
+}
+
+/* .logo {
+  width: auto;
+  height: 40px;
+  margin-left: auto;
+  padding-right: 10px;
+} */
+
+/* .logo {
+  display: inline-block;
+  height: 20px;
+  margin-left: auto;
+  width: auto;
+  height: 30px;
+  margin-right: 20px;
+} */
+
+.dateRangePicker {
+  display: inline-block;
+  width: 300px;
+  height: 40px;
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 25px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-right: 20px;
+}
+
+.e-popup {
+  height: fit-content;
+}
+
+.e-hide {
+  display: none;
+}
+
+.e-grid .e-gridheader {
+  border: 1px solid white;
+}
+
+.e-grid .e-headercell {
+  color: black;
+  background-color: lightsteelblue;
+}
+
+.e-grid .e-headercelldiv {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  color: white;
+  overflow: hidden;
+}
+
+.e-grid .e-columnselection {
+  background-color: #aec2ec;
+}
+
+.e-input-group input.e-input,
+.e-input-group.e-control-wrapper input.e-input {
+  font-size: 16px;
+}
+
+.e-input-group .e-input-group-icon:last-child,
+.e-input-group.e-control-wrapper .e-input-group-icon:last-child {
+  font-size: 12px;
+  margin-right: 0;
+  background-color: white;
+}
+
+.e-calendar .e-content td:hover span.e-day,
+.e-calendar .e-content td:focus span.e-day,
+.e-bigger.e-small .e-calendar .e-content td:hover span.e-day,
+.e-bigger.e-small .e-calendar .e-content td:focus span.e-day {
+  background-color: red;
+  border: 2px solid;
+  padding-right: 0;
+  margin-right: 0;
+  color: #212529;
+}
+
+.e-calendar .e-header .e-title,
+.e-bigger.e-small .e-calendar .e-header .e-title {
+  font-size: 16px;
+}
+
+.e-calendar .e-header span,
+.e-bigger.e-small .e-calendar .e-header span {
+  border: 1px solid;
+  color: chocolate;
+}
+
+.e-grid
+  .e-gridheader
+  .e-icons:not(.e-icon-hide):not(.e-check):not(.e-stop):not(
+    .e-icon-reorderuparrow
+  ):not(.e-icon-reorderdownarrow) {
+  color: white;
+}
+
+.e-grid
+  th.e-headercell[aria-sort='ascending']:not(.e-columnselection)
+  .e-headertext,
+.e-grid
+  th.e-headercell[aria-sort='descending']:not(.e-columnselection)
+  .e-headertext,
+.e-grid th.e-headercell[aria-sort='ascending'] .e-sortfilterdiv,
+.e-grid th.e-headercell[aria-sort='descending'] .e-sortfilterdiv {
+  color: white;
+}
+
+.e-grid .e-headercell .e-columnmenu {
+  margin-left: 0; /* Adjust this value as needed */
+  padding-left: 0px; /* Ensure no padding */
+}
+
+.e-grid .e-headercell[data-ej-mappingname='Truck'] .e-headercelldiv {
+  display: flex;
+  justify-content: start; /* Align text to the left */
+  padding-right: 0 !important; /* Remove extra padding */
+  gap: 0 !important; /* Eliminate spacing between text and icons */
+}
+
+.e-grid .e-headercell.e-filtered .e-columnmenu {
+  color: white !important; /* Change icon color */
+  background-color: darkblue !important; /* Change icon background */
+  border-radius: 4px; /* Optional: rounded corners */
+  padding: 2px; /* Optional: tighter fit */
+}
+
+.e-grid .e-filtered::before {
+  color: black;
+  background-color: yellow;
+  border: 7px solid yellow;
+}
 </style>
