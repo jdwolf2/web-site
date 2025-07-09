@@ -213,7 +213,7 @@ function onExportToExcel() {
 }
 
 .top-line-wrapper {
-  margin: 50px 0 0 0;
+  margin: 10px 0 0 0;
 }
 
 .top-line {
@@ -347,7 +347,7 @@ function onExportToExcel() {
 .e-daterangepicker.e-popup {
   position: fixed !important;
   left: 18px !important;
-  top: 105px !important;
+  top: 65px !important;
   z-index: 10000 !important;
 }
 
