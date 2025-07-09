@@ -1,10 +1,10 @@
 {
-  "name": "AccuSalt App",
+  "name": "AccuSalt Mobile",
   "short_name": "AccuSalt",
-  "theme_color": "#1e1e1e",
-  "background_color": "#1e1e1e",
-  "display": "standalone",
   "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2196f3",
   "icons": [
     {
       "src": "img/accusalt-192-192.png",
