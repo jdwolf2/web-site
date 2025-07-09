@@ -2,75 +2,88 @@
   <div class="outer-wrapper">
     <div class="app-container">
       <div class="top-line-wrapper">
-        <div class="top-line">
-          <img src="./assets/tableLogo.jpg" alt="AccuSalt Logo" class="logo" />
+        <div class="top-line-rows">
+          <div class="top-line">
+            <div class="row-logo">
+              <img
+                src="./assets/tableLogo.jpg"
+                alt="AccuSalt Logo"
+                class="logo"
+              />
+            </div>
 
-          <button
-            @click="triggerDateRange"
-            class="select-date"
-            :disabled="!isAuthenticated || isLoading"
-          >
-            Select Date Range
-          </button>
+            <div class="row-date">
+              <button
+                @click="triggerDateRange"
+                class="select-date"
+                :disabled="!isAuthenticated || isLoading"
+              >
+                Select Dates
+              </button>
 
-          <input
-            type="text"
-            class="date-display"
-            :value="isAuthenticated ? dateRangeDisplay : ''"
-            :placeholder="!isAuthenticated ? 'Sign in to select dates' : ''"
-            readonly
-            :disabled="!isAuthenticated"
-          />
+              <input
+                type="text"
+                class="date-display"
+                :value="isAuthenticated ? dateRangeDisplay : ''"
+                :placeholder="!isAuthenticated ? 'Sign in to select dates' : ''"
+                readonly
+                :disabled="!isAuthenticated"
+              />
+            </div>
 
-          <div
-            class="export-group"
-            :class="{
-              disabled: !isAuthenticated || items.length === 0 || isLoading,
-            }"
-          >
+            <div
+              class="export-group"
+              :class="{
+                disabled: !isAuthenticated || items.length === 0 || isLoading,
+              }"
+            >
+              <button
+                class="export-button"
+                @click="onExportToExcel"
+                :disabled="!isAuthenticated || items.length === 0 || isLoading"
+              >
+                Export to Excel
+              </button>
+
+              <select
+                v-model="exportOption"
+                class="export-dropdown"
+                :disabled="!isAuthenticated || items.length === 0 || isLoading"
+              >
+                <option value="all">All Records</option>
+                <option value="currentPage">Current Page</option>
+                <option value="filtered">Filtered Records</option>
+              </select>
+            </div>
+
             <button
-              class="export-button"
-              @click="onExportToExcel"
-              :disabled="!isAuthenticated || items.length === 0 || isLoading"
+              class="sign-in"
+              v-if="!isAuthenticated"
+              @click="onSignInClick"
             >
-              Export to Excel
+              Sign in
             </button>
-
-            <select
-              v-model="exportOption"
-              class="export-dropdown"
-              :disabled="!isAuthenticated || items.length === 0 || isLoading"
+            <button
+              class="sign-out"
+              v-if="isAuthenticated"
+              @click="onSignOutClick"
             >
-              <option value="all">All Records</option>
-              <option value="currentPage">Current Page</option>
-              <option value="filtered">Filtered Records</option>
-            </select>
+              Sign out
+            </button>
           </div>
-
-          <button
-            class="sign-in"
-            v-if="!isAuthenticated"
-            @click="onSignInClick"
-          >
-            Sign in
-          </button>
-          <button
-            class="sign-out"
-            v-if="isAuthenticated"
-            @click="onSignOutClick"
-          >
-            Sign out
-          </button>
-
-          <DtRange
-            ref="dtRangeRef"
-            :startUnix="startDate"
-            :stopUnix="stopDate"
-            @update:start="onStartDateUpdate"
-            @update:stop="onStopDateUpdate"
-          />
+          <!-- close .top-line -->
         </div>
+        <!-- close .top-line-rows -->
+
+        <DtRange
+          ref="dtRangeRef"
+          :startUnix="startDate"
+          :stopUnix="stopDate"
+          @update:start="onStartDateUpdate"
+          @update:stop="onStopDateUpdate"
+        />
       </div>
+      <!-- close .top-line-wrapper -->
 
       <div class="grid-wrapper">
         <div v-if="isAuthenticated && isLoading" class="loading-msg">
@@ -82,7 +95,9 @@
 
       <div v-if="fetchError" style="color: red">Error: {{ fetchError }}</div>
     </div>
+    <!-- close .app-container -->
   </div>
+  <!-- close .outer-wrapper -->
 </template>
 
 <script setup>
@@ -604,5 +619,70 @@ body {
   color: black;
   background-color: yellow;
   border: 7px solid yellow;
+}
+
+@media (orientation: portrait) {
+  .top-line-rows {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .row-logo {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .row-date {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+  .select-date {
+    flex: 0 0 auto;
+  }
+  .date-display {
+    flex: 1 1 auto;
+    margin-left: auto;
+    width: 100%;
+  }
+
+  /* .export-group {
+    flex: 0 0 auto;
+    margin-left: auto;
+    margin-right: 10px;
+  }
+  .export-button {
+    width: auto;
+    min-width: unset;
+    padding: 0px 10px;
+    margin-right: 0px;
+  }
+  
+  .sign-in, .sign-out {
+    flex: 0 0 auto;
+    margin-left: auto;
+    margin-right: 10px;
+  } */
+}
+@media (orientation: landscape) {
+  .top-line {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  /* .controls-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: auto;
+  }
+  .controls-group > * {
+    flex: 0 0 auto;
+  } */
 }
 </style>
