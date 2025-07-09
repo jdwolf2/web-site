@@ -213,7 +213,7 @@ function onExportToExcel() {
 }
 
 .top-line-wrapper {
-  margin: 50px 0 0 0;
+  margin: 10px 0 0 0;
 }
 
 .top-line {
@@ -254,7 +254,7 @@ function onExportToExcel() {
   display: flex;
   align-items: center;
   border: 2px solid white;
-  padding: 2px 5px;
+  padding: 8px 5px;
   gap: 5px;
 }
 .export-group.disabled {
@@ -267,7 +267,7 @@ function onExportToExcel() {
   color: black;
   border: none;
   cursor: pointer;
-  padding: 0 10px;
+  padding: 0 5px;
 }
 .export-button:hover:enabled {
   background: #125da4;
@@ -347,7 +347,7 @@ function onExportToExcel() {
 .e-daterangepicker.e-popup {
   position: fixed !important;
   left: 18px !important;
-  top: 95px !important;
+  top: 65px !important;
   z-index: 10000 !important;
 }
 
@@ -387,14 +387,14 @@ body {
   font-size: 14px;
   height: 25px;
   padding: 0 10px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background: lightblue;
   color: black;
   border: none;
   cursor: pointer;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   margin-right: 0;
-  padding-right: 32px;
+  /* padding-right: 32px; */
   white-space: nowrap;
   width: auto;
   min-width: 0;
@@ -407,7 +407,7 @@ body {
 .export-dropdown {
   padding: 0px 10px;
   font-size: 14px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   height: 25px;
   margin-left: 0px;
   border: none;
@@ -597,7 +597,6 @@ body {
 .e-grid .e-headercell.e-filtered .e-columnmenu {
   color: white !important; /* Change icon color */
   background-color: darkblue !important; /* Change icon background */
-  border-radius: 4px; /* Optional: rounded corners */
   padding: 2px; /* Optional: tighter fit */
 }
 
