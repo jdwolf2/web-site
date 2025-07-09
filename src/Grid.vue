@@ -36,6 +36,7 @@
           >
             <EColumns>
               <EColumn
+                class="table-margin"
                 v-for="col in filteredColumns"
                 :key="col.field"
                 :field="col.field"
