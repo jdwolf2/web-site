@@ -669,6 +669,26 @@ body {
   .outter-wrapper {
     margin: 0;
   }
+
+  .e-daterangepicker.e-popup {
+    position: fixed !important;
+    /* left: 50% !important; */
+    transform: translate(40px, 200px) !important;
+
+    min-width: 350px !important;
+    max-width: 100% !important;
+    z-index: 10000 !important;
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); */
+  }
+
+  .e-daterangepicker .e-calendar-container {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .e-daterangepicker .e-calendar {
+    width: 100% !important;
+  }
 }
 @media (orientation: landscape) {
   .top-line {
@@ -715,7 +735,24 @@ body {
   .outter-wrapper {
     margin: 0;
   }
+
+  .e-daterangepicker .e-calendar-container {
+    flex-direction: row !important;
+  }
+
+  .e-daterangepicker.e-popup {
+    position: fixed !important;
+    /* left: 50% !important; */
+    transform: translateX(20%) !important;
+
+    min-height: 350px !important;
+    max-height: 100vh !important;
+
+    z-index: 10000 !important;
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); */
+  }
 }
+
 .table-container {
   margin: 0;
 }
