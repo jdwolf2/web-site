@@ -18,7 +18,7 @@
                 class="select-date"
                 :disabled="!isAuthenticated || isLoading"
               >
-                DateRange
+                Dates
               </button>
 
               <input
@@ -331,11 +331,11 @@ function onExportToExcel() {
 
 .date-display {
   height: 25px;
-  font-size: 16px;
+  font-size: 20px;
   border: 1px solid #bdbdbd;
   background: #f5f5f5;
   padding: 0 12px;
-  min-width: 210px;
+  min-width: 280px;
 }
 
 .grid-wrapper {
@@ -361,8 +361,8 @@ function onExportToExcel() {
 
 .e-daterangepicker.e-popup {
   position: fixed !important;
-  left: 18px !important;
-  top: 65px !important;
+  left: 130px !important;
+  top: 70px !important;
   z-index: 10000 !important;
 }
 
@@ -641,8 +641,8 @@ body {
   .date-display {
     flex: 1 1 auto;
     margin-left: auto;
-    width: 100%;
-    height: 34px;
+    width: 200;
+    height: 40px;
     font-size: 20px;
   }
   .sign-in,
@@ -729,8 +729,8 @@ body {
 
   .date-display {
     height: 35px;
-    width: 150px;
-    font-size: 20px;
+    width: 200px;
+    font-size: 18px;
   }
   .outter-wrapper {
     margin: 0;
