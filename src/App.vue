@@ -222,7 +222,7 @@ function onExportToExcel() {
 
 .logo {
   width: auto;
-  height: 35px;
+  height: 25px;
   margin-left: 10px;
   margin-right: 0;
 }
@@ -335,7 +335,7 @@ function onExportToExcel() {
   border: 1px solid #bdbdbd;
   background: #f5f5f5;
   padding: 0 12px;
-  min-width: 150px;
+  min-width: 200px;
 }
 
 .grid-wrapper {
@@ -496,7 +496,7 @@ body {
 .dateRangePicker {
   display: inline-block;
   width: 300px;
-  height: 40px;
+  height: 25px;
   background-color: white;
   font-family: Arial, Helvetica, sans-serif;
   padding-left: 25px;

@@ -29,7 +29,7 @@
             :allowTextWrap="true"
             :autoFit="false"
             :width="'100%'"
-            :height="'650px'"
+            :height="'500px'"
             :frozenRows="0"
             :frozenColumns="1"
             @headerCellInfo="onHeaderCellInfo"
