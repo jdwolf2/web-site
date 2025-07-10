@@ -335,7 +335,7 @@ function onExportToExcel() {
   border: 1px solid #bdbdbd;
   background: #f5f5f5;
   padding: 0 12px;
-  min-width: 280px;
+  min-width: 150px;
 }
 
 .grid-wrapper {
@@ -706,7 +706,7 @@ body {
   .sign-in,
   .sign-out {
     flex: 0 0 auto;
-    margin-left: auto;
+    margin-left: 30px;
     height: 40px;
     width: 78px;
     font-size: 16px;
@@ -729,7 +729,7 @@ body {
 
   .date-display {
     height: 35px;
-    width: 200px;
+    width: 230px;
     font-size: 18px;
   }
   .outter-wrapper {
