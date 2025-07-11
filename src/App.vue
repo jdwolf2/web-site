@@ -2,11 +2,12 @@
   <div class="outer-wrapper">
     <div class="app-container">
       <div class="top-line-wrapper">
+        top-r
         <div class="top-line-rows">
           <div class="top-line">
             <div class="row-logo">
               <img
-                src="./assets/tableLogo.jpg"
+                src="./assets/accuSaltLogo.png"
                 alt="AccuSalt Logo"
                 class="logo"
               />
@@ -222,13 +223,13 @@ function onExportToExcel() {
 
 .logo {
   width: auto;
-  height: 25px;
-  margin-left: 10px;
-  margin-right: 0;
+  height: 35px;
+  padding-top: 4px;
+  margin: 0;
 }
 
 .top-line-wrapper {
-  margin: 10px 0 0 0;
+  margin: 5px 0 0 0;
 }
 
 .top-line {
@@ -238,22 +239,24 @@ function onExportToExcel() {
   flex-wrap: wrap;
 }
 
-.select-date,
 .sign-in,
-.sign-out,
-.export-button,
-.export-dropdown {
-  height: 25px;
+.sign-out {
+  height: 30px;
   font-size: 16px;
   margin: 0;
+  border-radius: 5px;
 }
 
 .select-date {
+  height: 30px;
+  font-size: 16px; /* optional size */
   background: lightblue;
   color: black;
-  border: none;
+  border-right: 3px solid lightgray;
   cursor: pointer;
   padding: 0 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .select-date:disabled {
   background: #ccc;
@@ -263,46 +266,6 @@ function onExportToExcel() {
 .select-date:hover:enabled {
   background: #125da4;
   color: white;
-}
-
-.export-group {
-  display: flex;
-  align-items: center;
-  border: 2px solid white;
-  padding: 8px 5px;
-  gap: 5px;
-}
-.export-group.disabled {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.export-button {
-  background: lightblue;
-  color: black;
-  border: none;
-  cursor: pointer;
-  padding: 0 5px;
-}
-.export-button:hover:enabled {
-  background: #125da4;
-  color: white;
-}
-.export-button:disabled {
-  background-color: gray;
-  color: white;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.export-dropdown {
-  padding: 0 10px;
-  border: none;
-}
-.export-dropdown:disabled {
-  background-color: #ccc;
-  color: #666;
-  opacity: 0.6;
 }
 
 .sign-in {
@@ -330,16 +293,62 @@ function onExportToExcel() {
 }
 
 .date-display {
-  height: 25px;
-  font-size: 20px;
-  border: 1px solid #bdbdbd;
+  height: 20px;
+  padding: 4px 10px 2px 10px;
+  font-size: 16px;
   background: #f5f5f5;
-  padding: 0 12px;
-  min-width: 200px;
+  padding-bottom: 1 12px;
+  min-width: 250px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.export-group {
+  display: flex;
+}
+
+.export-button {
+  align-items: center;
+  height: 30px;
+  background: lightblue;
+  color: black;
+  border-right: 2px solid lightgray;
+  cursor: pointer;
+  padding: 0 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-right: 0;
+  white-space: nowrap;
+  width: auto;
+  min-width: 0;
+}
+.export-button:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.export-button:hover:enabled {
+  background: #125da4;
+  color: white;
+}
+.export-dropdown {
+  padding: 0 10px;
+  height: 30px;
+  font-size: 16px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-left: 0px;
+}
+.export-dropdown:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
 
 .grid-wrapper {
-  margin: 4px 10px 0 10px;
+  /* margin: 4px 10px 0 10px; */
+  margin: 0;
   text-align: left;
   min-height: 520px;
 }
@@ -355,7 +364,7 @@ function onExportToExcel() {
 
 .loading-msg {
   font-size: 1.1rem;
-  margin: 20px;
+  margin: 0;
   color: #333;
 }
 
@@ -383,39 +392,8 @@ body {
 .export-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 10px 0 10px 10px;
-}
-
-.export-button {
-  font-size: 16px;
-  height: 25px;
-  padding: 0 10px;
-  /* border-radius: 5px; */
-  background: lightblue;
-  color: black;
-  border: none;
-  cursor: pointer;
-  /* margin-left: 10px; */
-  margin-right: 0;
-  /* padding-right: 32px; */
-  white-space: nowrap;
-  width: auto;
-  min-width: 0;
-}
-.export-button:hover:enabled {
-  background: #125da4;
-  color: #fff;
-}
-
-.export-dropdown {
-  padding: 0px 10px;
-  font-size: 16px;
-  /* border-radius: 5px; */
-  height: 25px;
-  margin-left: 0px;
-  border: none;
-  /* border: 1px solid #ccc; */
+  gap: 0;
+  /* margin: 10px 0 10px 10px; */
 }
 
 .e-grid td.e-selectionbackground {
@@ -446,7 +424,7 @@ body {
   display: flex;
   align-items: center;
   background-color: white;
-  margin-top: 2%;
+  /* margin-top: 2%; */
   height: max-content;
 }
 
@@ -476,22 +454,6 @@ body {
   display: flex;
   margin: 0;
 }
-
-/* .logo {
-  width: auto;
-  height: 40px;
-  margin-left: auto;
-  padding-right: 10px;
-} */
-
-/* .logo {
-  display: inline-block;
-  height: 20px;
-  margin-left: auto;
-  width: auto;
-  height: 30px;
-  margin-right: 20px;
-} */
 
 .dateRangePicker {
   display: inline-block;
@@ -610,6 +572,16 @@ body {
   background-color: yellow;
   border: 7px solid yellow;
 }
+.sign-in,
+.sign-out {
+  flex: 0 0 auto;
+  /* padding: 10px 0; */
+  margin-left: auto;
+  height: 30px;
+  width: 90px;
+  font-size: 16px;
+  align-self: center;
+}
 
 @media (orientation: portrait) {
   .top-line-rows {
@@ -631,41 +603,20 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    gap: 10px;
+    gap: 0;
   }
   .select-date {
     flex: 0 0 auto;
-    height: 35px;
-    font-size: 20px;
+    height: 30px;
+    font-size: 16px;
+    border-right: 2px solid lightgray;
   }
   .date-display {
     flex: 1 1 auto;
-    margin-left: auto;
-    width: 200;
-    height: 40px;
-    font-size: 20px;
+    width: 250px;
+    font-size: 16px;
   }
-  .sign-in,
-  .sign-out {
-    flex: 0 0 auto;
-    padding: 10px 0;
-    margin-left: auto;
-    height: 40px;
-    width: 92px;
-    font-size: 18px;
-    align-self: center;
-  }
-  .export-group {
-    flex: 0 0 auto;
-    margin-left: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .export-button {
-    width: auto;
-    min-width: 0;
-  }
+
   .outter-wrapper {
     margin: 0;
   }
@@ -696,42 +647,24 @@ body {
     align-items: center;
     flex-wrap: nowrap;
   }
-  .logo {
-    width: auto;
-    height: 35px;
-    margin-left: 8px;
-    margin-right: 0;
-  }
 
   .sign-in,
   .sign-out {
     flex: 0 0 auto;
-    margin-left: 30px;
-    height: 40px;
-    width: 78px;
+    margin-left: 0;
+    height: 30px;
+    width: 90px;
     font-size: 16px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
   }
 
   .row-date {
     display: flex;
     /* align-items: center; */
     flex: 0 0 auto;
-    gap: 5px;
+    gap: 0;
   }
 
-  .select-date {
-    margin-right: 5px;
-    height: 34px;
-    font-size: 20px; /* optional size */
-    padding: 0 5px; /* optional spacing */
-  }
-
-  .date-display {
-    height: 35px;
-    width: 230px;
-    font-size: 18px;
-  }
   .outter-wrapper {
     margin: 0;
   }
@@ -762,5 +695,64 @@ body {
 }
 .table-margin {
   margin: 0 !important;
+}
+
+.select-date,
+.date-display {
+  display: inline-flex;
+  align-items: center;
+  height: 30px; /* Make sure both are equal */
+  line-height: 1;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+
+.select-date {
+  border-right: none; /* So the button and input touch cleanly */
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.date-display {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.export-group {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.export-button,
+.export-dropdown {
+  height: 30px;
+  font-size: 16px;
+  padding: 0 12px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+.export-button {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-right: none; /* Seamless connection to dropdown */
+  background: lightblue;
+  color: black;
+  cursor: pointer;
+}
+
+.export-button:hover:enabled {
+  background: #125da4;
+  color: white;
+}
+
+.export-dropdown {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background: white;
 }
 </style>

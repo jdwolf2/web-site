@@ -2,6 +2,10 @@
 
 import { register } from 'register-service-worker'
 
+navigator.serviceWorker?.addEventListener('controllerchange', () => {
+  window.location.reload() // forces a reload after the new service worker takes over
+})
+
 if (process.env.NODE_ENV === 'production') {
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready() {

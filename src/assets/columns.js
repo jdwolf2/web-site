@@ -26,6 +26,20 @@ export const timeFormatter = (field) => (data) => {
   })
 }
 
+export const numberValueAccessor = (field) => (data) => {
+  const value = data[field]
+  return value != null ? parseFloat(value) : null
+}
+
+export const numberWithUnitsValueAccessor = (field) => (data) => {
+  const value = data[field]
+  if (!value) return null
+
+  // Extract numeric portion only
+  const match = value.match(/[\d.]+/)
+  return match ? parseFloat(match[0]) : null
+}
+
 // Example: Custom formatting (optional alternative)
 // export const dateValueAccessor = (field) => (data) => {
 //   const dateStr = data[field];
@@ -39,18 +53,13 @@ export const columns = [
     textAlign: 'Left',
     width: 150,
   },
-  // {
-  //   field: 'Truck',
-  //   headerText: 'Truck',
-  //   textAlign: 'Left',
-  //   width: 50,
-  // },
 
   {
     field: 'Truck',
     headerText: 'Truck',
     textAlign: 'Left',
     width: 100, // Set close to estimated content width
+    valueAccessor: numberValueAccessor('Truck'),
   },
 
   {
@@ -58,6 +67,7 @@ export const columns = [
     headerText: 'Route',
     textAlign: 'Left',
     width: 100,
+    valueAccessor: numberValueAccessor('Route'),
   },
   {
     field: 'StartDate',
@@ -66,18 +76,6 @@ export const columns = [
     width: 180,
     valueAccessor: dateValueAccessor('StartDate'),
   },
-  // {
-  //   field: 'StartTime',
-  //   headerText: 'Start Time',
-  //   textAlign: 'Left',
-  //   width: 120,
-  // },
-  // {
-  //   field: 'StopTime',
-  //   headerText: 'Stop Time',
-  //   textAlign: 'Left',
-  //   width: 120,
-  // },
 
   {
     field: 'StartTime',
@@ -107,12 +105,14 @@ export const columns = [
     headerText: 'Total',
     textAlign: 'Left',
     width: 100,
+    valueAccessor: numberWithUnitsValueAccessor('Total'),
   },
   {
     field: 'Rate',
     headerText: 'Rate',
     textAlign: 'Left',
     width: 100,
+    numberWithUnitsValueAccessor: numberWithUnitsValueAccessor('Rate'),
   },
   {
     field: 'Lat',
