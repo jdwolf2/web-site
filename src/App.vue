@@ -2,7 +2,6 @@
   <div class="outer-wrapper">
     <div class="app-container">
       <div class="top-line-wrapper">
-        top-r
         <div class="top-line-rows">
           <div class="top-line">
             <div class="row-logo">
@@ -354,7 +353,7 @@ function onExportToExcel() {
 }
 
 .status-msg {
-  margin: 0.5em 10px;
+  margin: 0 10px;
   font-size: 1rem;
   color: #333;
   background: #f1f1f1;
@@ -375,6 +374,14 @@ function onExportToExcel() {
   z-index: 10000 !important;
 }
 
+body {
+  background-color: rgb(40, 40, 40);
+}
+
+/* body {
+  background-color: rgb(200, 200, 200);
+} */
+
 @import '~@syncfusion/ej2-base/styles/material.css';
 @import '~@syncfusion/ej2-buttons/styles/material.css';
 @import '~@syncfusion/ej2-calendars/styles/material.css';
@@ -384,10 +391,6 @@ function onExportToExcel() {
 @import '~@syncfusion/ej2-popups/styles/material.css';
 @import '~@syncfusion/ej2-splitbuttons/styles/material.css';
 @import '~@syncfusion/ej2-vue-grids/styles/material-lite.css';
-
-body {
-  background-color: rgb(40, 40, 40);
-}
 
 .export-controls {
   display: flex;
@@ -493,7 +496,7 @@ body {
 }
 
 .e-grid .e-columnselection {
-  background-color: #aec2ec;
+  background-color: #e2efd7;
 }
 
 .e-input-group input.e-input,
@@ -506,17 +509,6 @@ body {
   font-size: 12px;
   margin-right: 0;
   background-color: white;
-}
-
-.e-calendar .e-content td:hover span.e-day,
-.e-calendar .e-content td:focus span.e-day,
-.e-bigger.e-small .e-calendar .e-content td:hover span.e-day,
-.e-bigger.e-small .e-calendar .e-content td:focus span.e-day {
-  background-color: red;
-  border: 2px solid;
-  padding-right: 0;
-  margin-right: 0;
-  color: #212529;
 }
 
 .e-calendar .e-header .e-title,
@@ -754,5 +746,26 @@ body {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   background: white;
+}
+
+/* Light gray background for alternate rows */
+/* .e-grid .e-altrow {
+  background-color: #dee1e0;
+} */
+
+/* **************************************************************** */
+
+/* Optional: consistent hover effect */
+.e-grid .e-row:hover,
+.e-grid .e-altrow:hover,
+.e-grid .e-frozencontent .e-row:hover,
+.e-grid .e-frozen-left-content .e-row:hover {
+  background-color: #9ac7db;
+}
+
+/* Optional: for cell selection mode */
+.e-grid .e-selectionbackground.e-active {
+  background-color: #caf167 !important;
+  color: black !important;
 }
 </style>

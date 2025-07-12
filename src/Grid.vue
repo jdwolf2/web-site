@@ -8,8 +8,8 @@
             id="gridcomp"
             :dataSource="data"
             :allowScrolling="true"
-            :rowHeight="40"
-            :enableAltRow="true"
+            :rowHeight="35"
+            :enableAltRow="false"
             :allowReordering="false"
             :allowExcelExport="true"
             :columnQueryMode="'ExcludeHidden'"
@@ -21,15 +21,15 @@
             :pageSettings="pageSettings"
             :allowGrouping="true"
             :allowSorting="false"
+            :groupSettings="{ showDropArea: true, showGroupedColumn: true }"
             :showColumnMenu="true"
             :columnMenuItems="['ColumnChooser', 'Filter']"
-            :groupSettings="groupOptions"
             :allowFiltering="true"
             :filterSettings="filterSettings"
             :allowTextWrap="true"
             :autoFit="false"
             :width="'100%'"
-            :height="'500px'"
+            :height="'550px'"
             :frozenRows="0"
             :frozenColumns="1"
             @headerCellInfo="onHeaderCellInfo"
@@ -60,6 +60,7 @@ import {
   ColumnDirective as EColumn,
   ColumnsDirective as EColumns,
   Group,
+  Freeze,
   Sort,
   Resize,
   ColumnMenu,
@@ -87,7 +88,16 @@ const filteredColumns = computed(() =>
 )
 
 const gridRef = ref(null)
-provide('grid', [Group, Sort, Resize, ColumnMenu, Filter, Page, ExcelExport])
+provide('grid', [
+  Group,
+  Sort,
+  Resize,
+  ColumnMenu,
+  Filter,
+  Page,
+  Freeze,
+  ExcelExport,
+])
 
 onMounted(() => {
   gridRef.value?.autoFitColumns()
